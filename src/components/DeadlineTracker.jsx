@@ -72,7 +72,7 @@ export default function DeadlineTracker({ deadlines, setDeadlines }) {
     assignment: '📝 Assignment',
     exam: '📖 Exam Test',
     lab: '🧪 Lab File',
-    project: '💻 CSE Project',
+    project: '💻 CS/IT Project',
     other: '📌 Other Task'
   };
 

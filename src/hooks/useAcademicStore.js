@@ -411,7 +411,7 @@ export function useAcademicStore() {
       { 
         id: '1', 
         sender: 'ai', 
-        text: "Chat cleared! Let's start fresh. How can I help you with your B.Tech CSE subjects today?",
+        text: "Chat cleared! Let's start fresh. How can I help you with your B.Tech CS & IT subjects today?",
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) 
       }
     ]);

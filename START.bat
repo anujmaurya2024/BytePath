@@ -4,7 +4,7 @@ color 0A
 
 echo.
 echo ╔══════════════════════════════════════════════════╗
-echo ║   Pathfy – B.Tech CSE Academic Planner          ║
+echo ║   Pathfy – B.Tech CS & IT Academic Planner      ║
 echo ║   Setting up and launching dev server...         ║
 echo ╚══════════════════════════════════════════════════╝
 echo.

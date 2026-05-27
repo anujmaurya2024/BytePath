@@ -54,7 +54,7 @@ export default function SyllabusPanel({ uploadedPyqs }) {
           const fileResources = customResources.filter(r => r.type !== 'YouTube Link');
 
           // YouTube search query url
-          const dynamicYtQuery = `https://www.youtube.com/results?search_query=${encodeURIComponent(course.title + ' B.Tech CSE One Shot Lecture')}`;
+          const dynamicYtQuery = `https://www.youtube.com/results?search_query=${encodeURIComponent(course.title + ' B.Tech CS IT One Shot Lecture')}`;
 
           return (
             <div 

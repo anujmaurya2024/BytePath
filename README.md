@@ -1,6 +1,6 @@
-# BytePath – B.Tech CSE Curriculum Navigator & Career Launchpad
+# BytePath – B.Tech CS & IT Curriculum Navigator & Career Launchpad
 
-A comprehensive, production-ready single-page React application for B.Tech CSE students to track academic performance, predict CGPA, manage student workflows, and get personalized web development career guidance.
+A comprehensive, production-ready single-page React application for B.Tech CS & IT students to track academic performance, predict CGPA, manage student workflows, and get personalized web development career guidance.
 
 ---
 

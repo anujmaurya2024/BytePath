@@ -70,7 +70,7 @@ export default function App() {
             </div>
             <h1 className="text-2xl font-black gradient-text tracking-tight">BytePath</h1>
             <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
-              Track CSE credits, predict CGPA targets, and organize student workflows.
+              Track CS & IT credits, predict CGPA targets, and organize student workflows.
             </p>
           </div>
           
@@ -82,7 +82,7 @@ export default function App() {
               <input 
                 type="text" 
                 required
-                placeholder="e.g. BT/CSE/2026/042 or 'admin'"
+                placeholder="e.g. BT/CSE/2026/042, BT/IT/2026/012 or 'admin'"
                 value={rollInput}
                 onChange={(e) => setRollInput(e.target.value)}
                 className="app-input text-center text-base font-semibold shadow-sm"
@@ -255,7 +255,7 @@ export default function App() {
 
       {/* Global Footer */}
       <footer className="border-t border-slate-200 dark:border-indigo-950/20 py-6 text-center text-[10px] text-slate-400 relative z-10 shrink-0">
-        <p>© 2026 BytePath CSE Scholar Hub. Integrated B.Tech CSE Course Syllabus.</p>
+        <p>© 2026 BytePath CS & IT Scholar Hub. Integrated B.Tech CS & IT Course Syllabus.</p>
         <p className="mt-1 font-mono text-[9px] opacity-75">
           Program weight: 196 credits. Built with React & Tailwind CSS.
         </p>

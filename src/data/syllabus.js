@@ -1,5 +1,5 @@
 // ============================================================
-// COMPLETE BTECH CSE SYLLABUS DATA — 8 Semesters, 196 Credits
+// COMPLETE BTECH CS & IT SYLLABUS DATA — 8 Semesters, 196 Credits
 // ============================================================
 
 export const TOTAL_PROGRAM_CREDITS = 196;
