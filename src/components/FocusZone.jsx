@@ -401,6 +401,12 @@ export default function FocusZone({ focusSessions, setFocusSessions }) {
 
           {/* Radial Timer Wheel */}
           <div className="relative w-44 h-44 flex items-center justify-center my-4">
+            {/* Glowing backdrop shadow when active */}
+            <div className={`absolute inset-6 rounded-full blur-2xl opacity-20 dark:opacity-25 transition-all duration-1000 ${
+              isRunning 
+                ? (mode === 'focus' ? 'bg-indigo-500 shadow-[0_0_30px_rgba(99,102,241,0.6)]' : 'bg-emerald-500 shadow-[0_0_30px_rgba(16,185,129,0.6)]') 
+                : 'bg-transparent'
+            }`} />
             <svg className="w-full h-full transform -rotate-95" viewBox="0 0 100 100">
               <circle
                 className="text-slate-100 dark:text-surface-600/50"

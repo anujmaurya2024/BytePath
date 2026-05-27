@@ -75,15 +75,21 @@ body {
   border: 1px solid var(--glass-border);
   border-radius: 20px;
   box-shadow: 0 8px 32px var(--glass-shadow);
-  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), 
-              border-color 0.3s ease, 
-              box-shadow 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(99, 102, 241, 0.35);
+  box-shadow: 0 16px 40px rgba(99, 102, 241, 0.09);
 }
 
 .glass-card-hover:hover {
   transform: translateY(-4px);
-  border-color: rgba(99, 102, 241, 0.45);
-  box-shadow: 0 16px 40px rgba(99, 102, 241, 0.15);
+  border-color: rgba(99, 102, 241, 0.55);
+  box-shadow: 0 20px 48px rgba(99, 102, 241, 0.18);
 }
 
 /* Input Fields styling */
@@ -238,4 +244,41 @@ html.dark .tab-active {
   transition: stroke-dashoffset 0.3s ease;
   transform: rotate(-90deg);
   transform-origin: 50% 50%;
+}
+
+/* Global Selection Styling */
+::selection {
+  background: rgba(99, 102, 241, 0.22);
+  color: inherit;
+}
+
+/* Ambient Pulse Animation for Background Globs */
+@keyframes pulse-slow {
+  0%, 100% {
+    transform: scale(1) translate(0px, 0px);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scale(1.15) translate(3%, 4%);
+    opacity: 0.7;
+  }
+}
+.animate-pulse-slow {
+  animation: pulse-slow 18s ease-in-out infinite;
+}
+
+/* Interactive Active Tab Indicator Bar */
+.tab-active {
+  position: relative;
+}
+.tab-active::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 20%;
+  width: 60%;
+  height: 2.5px;
+  background: var(--gradient-primary);
+  border-radius: 99px;
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.8);
 }

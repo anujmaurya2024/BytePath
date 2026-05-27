@@ -46,6 +46,10 @@ export default function App() {
   if (!store.studentId) {
     return (
       <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-slate-50 dark:bg-[#05050c] text-slate-800 dark:text-slate-200 transition-colors duration-500">
+        {/* Ambient glowing blobs */}
+        <div className="absolute top-[-15%] left-[-15%] w-[60%] h-[60%] rounded-full bg-indigo-500/10 dark:bg-indigo-500/5 blur-[130px] pointer-events-none animate-pulse-slow"></div>
+        <div className="absolute bottom-[-15%] right-[-15%] w-[60%] h-[60%] rounded-full bg-purple-500/10 dark:bg-purple-500/5 blur-[130px] pointer-events-none animate-pulse-slow"></div>
+
         {/* Floating background particles */}
         {bgParticles.map(p => (
           <div
@@ -63,7 +67,7 @@ export default function App() {
           />
         ))}
 
-        <div className="w-full max-w-md p-8 glass-card border border-slate-200 dark:border-indigo-950/20 shadow-2xl relative z-10 mx-4">
+        <div className="w-full max-w-md p-8 glass-card border border-slate-200 dark:border-indigo-950/20 shadow-2xl relative z-10 mx-4 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(99,102,241,0.18)] dark:hover:shadow-[0_20px_50px_rgba(99,102,241,0.1)]">
           <div className="text-center mb-8">
             <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mx-auto shadow-lg shadow-indigo-500/35 mb-4 animate-bounce">
               <GraduationCap size={28} className="text-white" />
@@ -111,7 +115,10 @@ export default function App() {
   // 2. MAIN HUB APPARATUS
   return (
     <div className="min-h-screen relative bg-slate-50 dark:bg-[#05050a] text-slate-800 dark:text-slate-200 transition-colors duration-500 overflow-x-hidden flex flex-col justify-between">
-      
+      {/* Ambient glowing blobs */}
+      <div className="absolute top-[-15%] left-[-15%] w-[60%] h-[60%] rounded-full bg-indigo-500/10 dark:bg-indigo-500/5 blur-[130px] pointer-events-none animate-pulse-slow"></div>
+      <div className="absolute bottom-[-15%] right-[-15%] w-[60%] h-[60%] rounded-full bg-purple-500/10 dark:bg-purple-500/5 blur-[130px] pointer-events-none animate-pulse-slow"></div>
+
       {/* Floating particles */}
       {bgParticles.map(p => (
         <div

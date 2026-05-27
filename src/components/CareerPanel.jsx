@@ -18,26 +18,26 @@ function InsightCard({ insight, index }) {
       id={`insight-card-${index}`}
     >
       <div className="flex items-start gap-3">
-        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500/30 to-purple-500/30 border border-indigo-500/20 flex items-center justify-center shrink-0">
-          <Lightbulb size={14} className="text-indigo-400" />
+        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500/20 to-purple-500/20 dark:from-indigo-500/30 dark:to-purple-500/30 border border-indigo-500/10 dark:border-indigo-500/20 flex items-center justify-center shrink-0">
+          <Lightbulb size={14} className="text-indigo-600 dark:text-indigo-400" />
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2">
-            <h4 className="text-sm font-bold text-slate-200 leading-tight">{insight.headline}</h4>
-            <span className="text-xs text-indigo-400 shrink-0 mt-0.5">
+            <h4 className="text-sm font-bold text-slate-800 dark:text-slate-200 leading-tight">{insight.headline}</h4>
+            <span className="text-xs text-indigo-500 dark:text-indigo-400 shrink-0 mt-0.5">
               {expanded ? '▲' : '▼'}
             </span>
           </div>
 
           {expanded && (
             <div className="mt-3 space-y-3 animate-slide-up">
-              <p className="text-sm text-slate-400 leading-relaxed">{insight.body}</p>
-              <div className="bg-indigo-950/40 border border-indigo-700/30 rounded-xl p-3">
+              <p className="text-sm text-slate-650 dark:text-slate-400 leading-relaxed">{insight.body}</p>
+              <div className="bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-700/30 rounded-xl p-3">
                 <div className="flex items-start gap-2">
-                  <Target size={13} className="text-orange-400 shrink-0 mt-0.5" />
+                  <Target size={13} className="text-orange-500 dark:text-orange-400 shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-xs font-bold text-orange-400 uppercase tracking-wider">{insight.actionLabel}: </span>
-                    <span className="text-xs text-slate-400">{insight.action}</span>
+                    <span className="text-xs font-bold text-orange-600 dark:text-orange-400 uppercase tracking-wider">{insight.actionLabel}: </span>
+                    <span className="text-xs text-slate-650 dark:text-slate-400">{insight.action}</span>
                   </div>
                 </div>
               </div>
@@ -67,11 +67,11 @@ function PhaseCard({ phaseKey, data, isActive, onSelect }) {
         <span className="text-xl">{data.icon}</span>
         <span className="text-xs text-slate-500 font-medium">{meta.label}</span>
       </div>
-      <p className={`text-sm font-bold ${isActive ? data.accentColor : 'text-slate-400'}`}>
+      <p className={`text-sm font-bold ${isActive ? data.accentColor : 'text-slate-600 dark:text-slate-400'}`}>
         {data.phase}
       </p>
       {isActive && (
-        <div className="mt-1.5 flex items-center gap-1 text-xs text-indigo-400">
+        <div className="mt-1.5 flex items-center gap-1 text-xs text-indigo-650 dark:text-indigo-400">
           <span>Current phase</span>
           <ArrowRight size={10} />
         </div>
@@ -84,7 +84,6 @@ function PhaseCard({ phaseKey, data, isActive, onSelect }) {
 const ROADMAP_STEPS = [
   { phase: '1-2', milestone: 'HTML/CSS + JavaScript Basics', tech: ['HTML5', 'CSS3', 'Vanilla JS', 'DOM APIs'] },
   { phase: '3-4', milestone: 'React + Node.js Fundamentals', tech: ['React.js', 'Node.js', 'Express', 'npm/Git'] },
-  { phase: '5-6', milestone: 'Full-Stack MERN + Databases', tech: ['MongoDB', 'PostgreSQL', 'REST APIs', 'JWT Auth'] },
   { phase: '7-8', milestone: 'Cloud, AI & Enterprise Scale', tech: ['AWS/Docker', 'Next.js', 'CI/CD', 'ML APIs'] },
 ];
 
@@ -95,12 +94,12 @@ function RoadmapTimeline({ currentPhase }) {
   return (
     <div className="glass-card p-5">
       <div className="flex items-center gap-2 mb-4">
-        <Rocket size={15} className="text-indigo-400" />
-        <h3 className="text-sm font-bold text-slate-300">Web Dev Career Roadmap</h3>
+        <Rocket size={15} className="text-indigo-500 dark:text-indigo-400" />
+        <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300">Web Dev Career Roadmap</h3>
       </div>
       <div className="relative">
         {/* Timeline line */}
-        <div className="absolute left-5 top-0 bottom-0 w-0.5 bg-surface-500 z-0" />
+        <div className="absolute left-5 top-0 bottom-0 w-0.5 bg-slate-200 dark:bg-surface-500 z-0" />
 
         <div className="space-y-4 relative z-10">
           {ROADMAP_STEPS.map((step, idx) => {
@@ -114,18 +113,18 @@ function RoadmapTimeline({ currentPhase }) {
                     ? 'bg-gradient-to-br from-emerald-500 to-teal-600 border-emerald-400 text-white'
                     : isCurrent
                     ? 'bg-gradient-to-br from-indigo-500 to-purple-600 border-indigo-400 text-white animate-pulse-glow'
-                    : 'bg-surface-700 border-surface-500 text-slate-600'
+                    : 'bg-slate-100 dark:bg-surface-700 border-slate-200 dark:border-surface-500 text-slate-400 dark:text-slate-500'
                   }
                 `}>
                   {isDone ? '✓' : idx + 1}
                 </div>
                 <div className="flex-1 pb-1">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <p className={`text-sm font-semibold ${isCurrent ? 'text-indigo-300' : isDone ? 'text-emerald-400' : 'text-slate-500'}`}>
+                    <p className={`text-sm font-semibold ${isCurrent ? 'text-indigo-600 dark:text-indigo-300' : isDone ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-500'}`}>
                       {step.milestone}
                     </p>
                     {isCurrent && (
-                      <span className="badge bg-indigo-900/50 text-indigo-300 border border-indigo-700/40">You are here</span>
+                      <span className="badge bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300 border border-indigo-150 dark:border-indigo-700/40">You are here</span>
                     )}
                   </div>
                   <div className="flex flex-wrap gap-1.5 mt-1.5">
@@ -133,10 +132,10 @@ function RoadmapTimeline({ currentPhase }) {
                       <span key={t} className={`
                         text-[10px] px-2 py-0.5 rounded-md font-mono font-medium border
                         ${isCurrent
-                          ? 'bg-indigo-900/30 text-indigo-300 border-indigo-700/30'
+                          ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-650 dark:text-indigo-300 border-indigo-100 dark:border-indigo-700/30'
                           : isDone
-                          ? 'bg-emerald-900/20 text-emerald-500 border-emerald-800/30'
-                          : 'bg-surface-600/30 text-slate-600 border-surface-500/20'
+                          ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-500 border-emerald-100 dark:border-emerald-800/30'
+                          : 'bg-slate-50 dark:bg-surface-600/30 text-slate-500 dark:text-slate-500 border-slate-150 dark:border-surface-500/20'
                         }
                       `}>
                         {t}
@@ -231,8 +230,8 @@ export default function CareerPanel({ careerPhase, currentSemester }) {
         {/* Resources */}
         <div className="glass-card p-5">
           <div className="flex items-center gap-2 mb-4">
-            <ExternalLink size={15} className="text-indigo-400" />
-            <h3 className="text-sm font-bold text-slate-300">Curated Resources</h3>
+            <ExternalLink size={15} className="text-indigo-550 dark:text-indigo-400" />
+            <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300">Curated Resources</h3>
           </div>
           <div className="space-y-2">
             {RESOURCES.filter((r) => r.phase === selectedPhase).map((r) => (
@@ -241,14 +240,14 @@ export default function CareerPanel({ careerPhase, currentSemester }) {
                 href={r.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 p-3 rounded-xl bg-surface-700/30 border border-surface-500/10 hover:border-indigo-500/30 hover:bg-surface-600/30 transition-all group"
+                className="flex items-center gap-3 p-3 rounded-xl bg-slate-50/50 dark:bg-surface-700/30 border border-slate-150 dark:border-surface-500/10 hover:border-indigo-500/20 dark:hover:border-indigo-500/30 hover:bg-indigo-50/20 dark:hover:bg-surface-600/30 transition-all group"
               >
                 <div className="w-2 h-2 rounded-full bg-indigo-500 shrink-0" />
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-slate-200 group-hover:text-indigo-300 transition-colors">{r.label}</p>
-                  <p className="text-xs text-slate-500">{r.desc}</p>
+                  <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 group-hover:text-indigo-650 dark:group-hover:text-indigo-300 transition-colors">{r.label}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">{r.desc}</p>
                 </div>
-                <ExternalLink size={12} className="text-slate-600 group-hover:text-indigo-400 transition-colors shrink-0" />
+                <ExternalLink size={12} className="text-slate-400 dark:text-slate-650 group-hover:text-indigo-550 dark:group-hover:text-indigo-400 transition-colors shrink-0" />
               </a>
             ))}
             {RESOURCES.filter((r) => r.phase === selectedPhase).length === 0 && (
