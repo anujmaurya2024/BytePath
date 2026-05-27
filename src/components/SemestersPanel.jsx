@@ -233,8 +233,7 @@ export default function SemestersPanel({
   pastSgpas,
   updateSemesterSGPA,
   attendanceLogs,
-  setAttendanceLogs,
-  antigravityActive
+  setAttendanceLogs
 }) {
   const [filter, setFilter] = useState('all');
   const [expandedSem, setExpandedSem] = useState(1);
@@ -302,7 +301,7 @@ export default function SemestersPanel({
       </div>
 
       {/* Expandable semester cards */}
-      <div className={`space-y-4 ${antigravityActive ? 'antigravity-active' : ''}`}>
+      <div className="space-y-4">
         {filteredSemesters.map(semInfo => (
           <SemesterCard
             key={semInfo.semester}

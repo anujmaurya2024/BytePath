@@ -60,8 +60,7 @@ export default function Dashboard({
   focusSessions,
   expenses,
   monthlyBudget,
-  setActiveTab,
-  antigravityActive
+  setActiveTab
 }) {
   const creditsPct = Math.min((earnedCredits / TOTAL_PROGRAM_CREDITS) * 100, 100);
 
@@ -83,7 +82,7 @@ export default function Dashboard({
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Quick Metrics Grid */}
-      <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 ${antigravityActive ? 'antigravity-active' : ''}`}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
           icon={Award}
           label="Current CGPA"

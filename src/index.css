@@ -135,31 +135,7 @@ body {
   text-transform: uppercase;
 }
 
-/* Antigravity floating card physics */
-@keyframes float-pattern-1 {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-10px) rotate(0.4deg); }
-}
 
-@keyframes float-pattern-2 {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-14px) rotate(-0.5deg); }
-}
-
-@keyframes float-pattern-3 {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(0.3deg); }
-}
-
-.antigravity-active .float-card:nth-child(3n+1) {
-  animation: float-pattern-1 4s ease-in-out infinite;
-}
-.antigravity-active .float-card:nth-child(3n+2) {
-  animation: float-pattern-2 4.5s ease-in-out 0.3s infinite;
-}
-.antigravity-active .float-card:nth-child(3n+3) {
-  animation: float-pattern-3 3.8s ease-in-out 0.6s infinite;
-}
 
 /* Background floating particles */
 @keyframes particle-drift {

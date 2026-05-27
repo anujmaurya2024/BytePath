@@ -36,7 +36,6 @@ Open **http://localhost:5173** in your browser.
 | **Interactive Dashboard** | Recharts SGPA/CGPA timeline with target baseline |
 | **Credit Progress Tracker** | Visual progress bar across all 196 program credits |
 | **Career Insight Engine** | Phase-based web dev guidance linked to actual courses |
-| **Antigravity Mode 🚀** | Easter egg: cards float with CSS keyframe animations |
 | **Semester Manager** | Toggle complete/in-progress/upcoming, view full course listings |
 | **Fully Responsive** | Works on mobile, tablet, and desktop |
 | **Dark Mode** | Glassmorphism design with custom dark theme |
@@ -84,8 +83,3 @@ src/
     └── CareerPanel.jsx        # Career guidance, roadmap, resources
 ```
 
----
-
-## 🎮 Antigravity Easter Egg
-
-Click the **"🚀 Antigravity"** button in the top-right header to activate gravity-defying card animations. Each card floats at a different speed and phase using staggered CSS `@keyframes`.

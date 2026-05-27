@@ -117,8 +117,6 @@ export function useAcademicStore() {
     ])
   );
 
-  const [antigravityActive, setAntigravityActive] = useState(false);
-
   // ---- Sync states to localStorage ----
   useEffect(() => {
     if (studentId) {
@@ -429,7 +427,6 @@ export function useAcademicStore() {
     setMonthlyBudget(3000);
     setSimulatedGrades({});
     setFocusSessions([]);
-    setAntigravityActive(false);
     clearChatLogs();
   }, [clearChatLogs]);
 
@@ -440,8 +437,6 @@ export function useAcademicStore() {
     setTheme,
     activeTab,
     setActiveTab,
-    antigravityActive,
-    setAntigravityActive,
     handleLogin,
     handleLogout,
 
