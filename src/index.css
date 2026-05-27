@@ -1,0 +1,265 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme Variables */
+:root {
+  --background: #f8fafc;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(99, 102, 241, 0.12);
+  --glass-shadow: rgba(99, 102, 241, 0.05);
+  --card-bg: #ffffff;
+  --input-bg: #f1f5f9;
+  --input-border: rgba(99, 102, 241, 0.15);
+  --gradient-primary: linear-gradient(135deg, #4f46e5, #7c3aed, #db2777);
+  --gradient-accent: linear-gradient(135deg, #f97316, #fb923c);
+  --gradient-success: linear-gradient(135deg, #10b981, #34d399);
+  --gradient-danger: linear-gradient(135deg, #ef4444, #f87171);
+}
+
+html.dark {
+  --background: #05050a;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --glass-bg: rgba(10, 10, 18, 0.75);
+  --glass-border: rgba(99, 102, 241, 0.18);
+  --glass-shadow: rgba(0, 0, 0, 0.4);
+  --card-bg: rgba(15, 15, 25, 0.85);
+  --input-bg: rgba(20, 20, 35, 0.7);
+  --input-border: rgba(99, 102, 241, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--background);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.3);
+  border-radius: 99px;
+  border: 2px solid var(--background);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.6);
+}
+
+/* Glassmorphic elements */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px var(--glass-shadow);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              border-color 0.3s ease, 
+              box-shadow 0.3s ease;
+}
+
+.glass-card-hover:hover {
+  transform: translateY(-4px);
+  border-color: rgba(99, 102, 241, 0.45);
+  box-shadow: 0 16px 40px rgba(99, 102, 241, 0.15);
+}
+
+/* Input Fields styling */
+.app-input {
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  color: var(--text-primary);
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-size: 0.875rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+}
+.app-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.18);
+  background: var(--card-bg);
+}
+.app-input::placeholder {
+  color: #64748b;
+  opacity: 0.7;
+}
+
+/* Gradients and Text effects */
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-accent {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 12px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Antigravity floating card physics */
+@keyframes float-pattern-1 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(0.4deg); }
+}
+
+@keyframes float-pattern-2 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-14px) rotate(-0.5deg); }
+}
+
+@keyframes float-pattern-3 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(0.3deg); }
+}
+
+.antigravity-active .float-card:nth-child(3n+1) {
+  animation: float-pattern-1 4s ease-in-out infinite;
+}
+.antigravity-active .float-card:nth-child(3n+2) {
+  animation: float-pattern-2 4.5s ease-in-out 0.3s infinite;
+}
+.antigravity-active .float-card:nth-child(3n+3) {
+  animation: float-pattern-3 3.8s ease-in-out 0.6s infinite;
+}
+
+/* Background floating particles */
+@keyframes particle-drift {
+  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0.2; }
+  50% { opacity: 0.5; }
+  100% { transform: translateY(-100vh) translateX(30px) scale(1.3); opacity: 0; }
+}
+
+.bg-particle {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: particle-drift linear infinite;
+  z-index: 0;
+}
+
+/* Card shine hover effect */
+.shine-effect {
+  position: relative;
+  overflow: hidden;
+}
+.shine-effect::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    30deg,
+    transparent 45%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 55%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+.shine-effect:hover::after {
+  transform: translateX(100%);
+}
+
+/* Active tab styles */
+.tab-active {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
+  border-color: rgba(99, 102, 241, 0.45);
+  color: #6366f1;
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.08);
+}
+html.dark .tab-active {
+  color: #a5b4fc;
+}
+
+.tab-inactive {
+  background: transparent;
+  border-color: transparent;
+  color: var(--text-secondary);
+}
+.tab-inactive:hover {
+  color: var(--text-primary);
+  background: rgba(99, 102, 241, 0.06);
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--gradient-primary);
+  color: white;
+  border-radius: 12px;
+  padding: 10px 20px;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.25);
+  transition: all 0.2s ease;
+}
+.btn-primary:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
+}
+
+/* Recharts customized style overrides */
+.recharts-default-tooltip {
+  background-color: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(12px) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Custom Micro-animations */
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+.bounce-hover:hover {
+  animation: bounce-subtle 1s ease infinite;
+}
+
+/* Pomodoro progress styling */
+.pomodoro-ring-circle {
+  transition: stroke-dashoffset 0.3s ease;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
