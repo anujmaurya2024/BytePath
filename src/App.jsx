@@ -137,10 +137,60 @@ export default function App() {
             </div>
           </form>
 
-          {/* Quick tips */}
-          <div className="mt-6 pt-4 border-t border-slate-100 dark:border-indigo-950/15 text-center text-[10px] text-slate-455 flex justify-center items-center gap-1.5">
-            <Shield size={11} className="text-indigo-400" />
-            <span>Type <strong>admin</strong> to publish custom materials.</span>
+          {/* 🔑 Quick Test Accounts Widget */}
+          <div className="mt-6 pt-4 border-t border-slate-200/80 dark:border-indigo-950/20 space-y-3">
+            <p className="text-[10px] uppercase font-bold tracking-widest text-slate-400 text-center">
+              🔑 Quick Test Account Credentials
+            </p>
+
+            <div className="grid grid-cols-2 gap-2 text-left">
+              {/* Test Student */}
+              <button
+                type="button"
+                onClick={() => {
+                  setRollInput('BT/CSE/2026/042');
+                  store.handleLogin('BT/CSE/2026/042');
+                }}
+                className="p-2.5 rounded-xl bg-slate-100/70 dark:bg-surface-700/40 border border-slate-200/60 dark:border-indigo-950/30 hover:border-indigo-500/50 transition-all text-left group cursor-pointer"
+              >
+                <div className="flex items-center justify-between text-[10px] font-bold text-indigo-500 mb-1">
+                  <span>Student Demo</span>
+                  <span className="text-[8px] bg-indigo-500/10 px-1 rounded">1-Click</span>
+                </div>
+                <div className="text-[10px] font-mono text-slate-700 dark:text-slate-300 truncate">
+                  student@bytemail.edu
+                </div>
+                <div className="text-[9px] text-slate-400 font-mono">
+                  Pass: <span className="font-semibold text-slate-500">Student@123</span>
+                </div>
+              </button>
+
+              {/* Test Admin */}
+              <button
+                type="button"
+                onClick={() => {
+                  setRollInput('admin');
+                  store.handleLogin('admin');
+                }}
+                className="p-2.5 rounded-xl bg-slate-100/70 dark:bg-surface-700/40 border border-slate-200/60 dark:border-indigo-950/30 hover:border-amber-500/50 transition-all text-left group cursor-pointer"
+              >
+                <div className="flex items-center justify-between text-[10px] font-bold text-amber-500 mb-1">
+                  <span>Admin Portal</span>
+                  <span className="text-[8px] bg-amber-500/10 px-1 rounded">1-Click</span>
+                </div>
+                <div className="text-[10px] font-mono text-slate-700 dark:text-slate-300 truncate">
+                  admin@bytemail.edu
+                </div>
+                <div className="text-[9px] text-slate-400 font-mono">
+                  Pass: <span className="font-semibold text-slate-500">Admin@123</span>
+                </div>
+              </button>
+            </div>
+
+            <div className="text-center text-[10px] text-slate-400 flex items-center justify-center gap-1">
+              <Shield size={11} className="text-indigo-400" />
+              <span>Click any test account box above to instantly log in.</span>
+            </div>
           </div>
         </div>
       </div>
