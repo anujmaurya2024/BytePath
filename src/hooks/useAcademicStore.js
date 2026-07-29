@@ -29,6 +29,43 @@ export function useAcademicStore() {
     }
   });
 
+  const [studentName, setStudentName] = useState(() => {
+    try {
+      return localStorage.getItem('studentName') || '';
+    } catch {
+      return '';
+    }
+  });
+
+  const [isOnboarded, setIsOnboarded] = useState(() => {
+    try {
+      return localStorage.getItem('isOnboarded') === 'true';
+    } catch {
+      return false;
+    }
+  });
+
+  const saveOnboardingProfile = ({ name, targetCgpa: target, pastSgpas: sgpas }) => {
+    try {
+      if (name) {
+        localStorage.setItem('studentName', name);
+        setStudentName(name);
+      }
+      if (target) {
+        localStorage.setItem('targetCgpa', target);
+        setTargetCgpa(target);
+      }
+      if (sgpas) {
+        localStorage.setItem('pastSgpas', JSON.stringify(sgpas));
+        setPastSgpas(sgpas);
+      }
+      localStorage.setItem('isOnboarded', 'true');
+      setIsOnboarded(true);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   // ---- Dark / Light toggler ----
   const [theme, setTheme] = useState(() => {
     try {
@@ -116,6 +153,25 @@ export function useAcademicStore() {
       }
     ])
   );
+
+  // ---- End-Sem Subscription Status ----
+  const [hasEndSemSubscription, setHasEndSemSubscription] = useState(() => {
+    try {
+      return localStorage.getItem('hasEndSemSubscription') === 'true';
+    } catch {
+      return false;
+    }
+  });
+
+  const activateEndSemSubscription = (paymentData) => {
+    try {
+      localStorage.setItem('hasEndSemSubscription', 'true');
+      localStorage.setItem('endSemSubscriptionData', JSON.stringify(paymentData));
+      setHasEndSemSubscription(true);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   // ---- Sync states to localStorage ----
   useEffect(() => {
@@ -432,11 +488,16 @@ export function useAcademicStore() {
 
   return {
     // profile & settings
-    studentId,
     theme,
     setTheme,
     activeTab,
     setActiveTab,
+    // profile & onboarding
+    studentId,
+    studentName,
+    setStudentName,
+    isOnboarded,
+    saveOnboardingProfile,
     handleLogin,
     handleLogout,
 
@@ -486,6 +547,10 @@ export function useAcademicStore() {
     advisorChat,
     addUserChat,
     clearChatLogs,
+
+    // End-Sem Subscription
+    hasEndSemSubscription,
+    activateEndSemSubscription,
 
     resetAll
   };

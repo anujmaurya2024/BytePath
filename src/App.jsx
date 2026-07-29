@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAcademicStore } from './hooks/useAcademicStore';
-import Header from './components/Header';
-import TabNav from './components/TabNav';
+import Sidebar from './components/Sidebar';
+import TopHeader from './components/TopHeader';
 import Dashboard from './components/Dashboard';
 import SemestersPanel from './components/SemestersPanel';
 import PredictorPanel from './components/PredictorPanel';
@@ -13,12 +13,14 @@ import GradeSimulator from './components/GradeSimulator';
 import CareerPanel from './components/CareerPanel';
 import AdminPortal from './components/AdminPortal';
 import AdvisorPanel from './components/AdvisorPanel';
-import { GraduationCap, ArrowRight, Shield } from 'lucide-react';
+import OnboardingModal from './components/OnboardingModal';
+import { GraduationCap, ArrowRight, Shield, Sparkles } from 'lucide-react';
 
 export default function App() {
   const store = useAcademicStore();
   const [rollInput, setRollInput] = useState('');
   const [bgParticles, setBgParticles] = useState([]);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Generate floating background particles on mount
   useEffect(() => {
@@ -80,9 +82,24 @@ export default function App() {
           
           <form onSubmit={handleLoginSubmit} className="space-y-5">
             <div>
-              <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-550 dark:text-slate-500 mb-2">
-                University Roll Number / ID
-              </label>
+              <div className="flex items-center justify-between mb-2">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-550 dark:text-slate-500">
+                  University Roll Number / ID
+                </label>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const branches = ['CSE', 'IT', 'AI', 'DS'];
+                    const branch = branches[Math.floor(Math.random() * branches.length)];
+                    const num = String(Math.floor(100 + Math.random() * 900));
+                    setRollInput(`BT/${branch}/2026/${num}`);
+                  }}
+                  className="text-[10px] font-bold text-indigo-500 hover:text-indigo-400 flex items-center gap-1 cursor-pointer transition-colors"
+                >
+                  <Sparkles size={11} /> Generate Unique ID
+                </button>
+              </div>
+
               <input 
                 type="text" 
                 required
@@ -93,13 +110,31 @@ export default function App() {
               />
             </div>
             
-            <button 
-              type="submit" 
-              className="w-full btn-primary py-3 rounded-xl flex items-center justify-center gap-2 text-sm font-bold shadow-md cursor-pointer"
-            >
-              <span>Access Profile</span>
-              <ArrowRight size={15} />
-            </button>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <button 
+                type="submit" 
+                className="w-full btn-primary py-3 rounded-xl flex items-center justify-center gap-2 text-xs font-bold shadow-md cursor-pointer"
+              >
+                <span>Access Profile</span>
+                <ArrowRight size={14} />
+              </button>
+
+              <button 
+                type="button" 
+                onClick={() => {
+                  const branches = ['CSE', 'IT', 'AI', 'DS'];
+                  const branch = branches[Math.floor(Math.random() * branches.length)];
+                  const num = String(Math.floor(100 + Math.random() * 900));
+                  const generatedId = `BT/${branch}/2026/${num}`;
+                  setRollInput(generatedId);
+                  store.handleLogin(generatedId);
+                }}
+                className="w-full py-3 rounded-xl border border-indigo-500/30 bg-indigo-500/10 text-indigo-500 hover:bg-indigo-500 hover:text-white transition-all text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer"
+              >
+                <Sparkles size={13} />
+                <span>Auto-Generate & Enter</span>
+              </button>
+            </div>
           </form>
 
           {/* Quick tips */}
@@ -112,18 +147,18 @@ export default function App() {
     );
   }
 
-  // 2. MAIN HUB APPARATUS
+  // 2. MAIN HUB APPARATUS WITH LEFT SIDEBAR LAYOUT
   return (
-    <div className="min-h-screen relative bg-slate-50 dark:bg-[#05050a] text-slate-800 dark:text-slate-200 transition-colors duration-500 overflow-x-hidden flex flex-col justify-between">
-      {/* Ambient glowing blobs */}
-      <div className="absolute top-[-15%] left-[-15%] w-[60%] h-[60%] rounded-full bg-indigo-500/10 dark:bg-indigo-500/5 blur-[130px] pointer-events-none animate-pulse-slow"></div>
-      <div className="absolute bottom-[-15%] right-[-15%] w-[60%] h-[60%] rounded-full bg-purple-500/10 dark:bg-purple-500/5 blur-[130px] pointer-events-none animate-pulse-slow"></div>
+    <div className="min-h-screen relative bg-slate-50 dark:bg-[#05050a] text-slate-800 dark:text-slate-200 transition-colors duration-500 overflow-x-hidden flex">
+      {/* Ambient glowing background blobs */}
+      <div className="fixed top-[-15%] left-[-15%] w-[60%] h-[60%] rounded-full bg-indigo-500/10 dark:bg-indigo-500/5 blur-[130px] pointer-events-none animate-pulse-slow"></div>
+      <div className="fixed bottom-[-15%] right-[-15%] w-[60%] h-[60%] rounded-full bg-purple-500/10 dark:bg-purple-500/5 blur-[130px] pointer-events-none animate-pulse-slow"></div>
 
       {/* Floating particles */}
       {bgParticles.map(p => (
         <div
           key={p.id}
-          className="bg-particle bg-indigo-500/10 dark:bg-indigo-500/5"
+          className="bg-particle bg-indigo-500/10 dark:bg-indigo-500/5 pointer-events-none"
           style={{
             width: `${p.size}px`,
             height: `${p.size}px`,
@@ -136,25 +171,39 @@ export default function App() {
         />
       ))}
 
-      <div className="relative z-10 flex flex-col flex-1">
-        {/* Sticky Header */}
-        <Header 
+      {/* Pinned Left Sidebar Container (Holds ALL Student Info & Nav) */}
+      <Sidebar 
+        studentId={store.studentId}
+        studentName={store.studentName}
+        handleLogout={store.handleLogout}
+        theme={store.theme}
+        setTheme={store.setTheme}
+        currentCgpa={store.currentCgpa}
+        targetCgpa={store.targetCgpa}
+        earnedCredits={store.earnedCredits}
+        calculatedAttendancePercent={store.calculatedAttendancePercent}
+        hasEndSemSubscription={store.hasEndSemSubscription}
+        activeTab={store.activeTab}
+        setActiveTab={store.setActiveTab}
+        isOpen={sidebarOpen}
+        setIsOpen={setSidebarOpen}
+      />
+
+      {/* Main Right Content Workspace */}
+      <div className="flex-1 md:pl-80 flex flex-col min-h-screen relative z-10 transition-all duration-300 w-full">
+        {/* Top Header */}
+        <TopHeader 
+          activeTab={store.activeTab}
           studentId={store.studentId}
-          handleLogout={store.handleLogout}
+          currentCgpa={store.currentCgpa}
           theme={store.theme}
           setTheme={store.setTheme}
-          currentCgpa={store.currentCgpa}
+          handleLogout={store.handleLogout}
+          onOpenSidebar={() => setSidebarOpen(true)}
         />
 
-        {/* Dynamic Nav Tabs */}
-        <TabNav 
-          activeTab={store.activeTab}
-          setActiveTab={store.setActiveTab}
-          studentId={store.studentId}
-        />
-
-        {/* Main Workspace container */}
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full">
+        {/* Dynamic Workspace Container */}
+        <main className="max-w-7xl mx-auto px-4 sm:px-8 py-8 flex-1 w-full space-y-6">
           {store.activeTab === 'dashboard' && (
             <Dashboard 
               chartData={store.chartData}
@@ -206,6 +255,9 @@ export default function App() {
           {store.activeTab === 'pyqs' && (
             <SyllabusPanel 
               uploadedPyqs={store.uploadedPyqs}
+              hasEndSemSubscription={store.hasEndSemSubscription}
+              activateEndSemSubscription={store.activateEndSemSubscription}
+              studentId={store.studentId}
             />
           )}
 
@@ -258,15 +310,20 @@ export default function App() {
             />
           )}
         </main>
+
+        {/* Global Footer */}
+        <footer className="border-t border-slate-200/80 dark:border-indigo-950/30 py-6 text-center text-[10px] text-slate-400 relative z-10 shrink-0 mt-auto">
+          <p>© 2026 BytePath B.Tech CS & IT Scholar Hub. Integrated 196-Credit Curriculum.</p>
+        </footer>
       </div>
 
-      {/* Global Footer */}
-      <footer className="border-t border-slate-200 dark:border-indigo-950/20 py-6 text-center text-[10px] text-slate-400 relative z-10 shrink-0">
-        <p>© 2026 BytePath CS & IT Scholar Hub. Integrated B.Tech CS & IT Course Syllabus.</p>
-        <p className="mt-1 font-mono text-[9px] opacity-75">
-          Program weight: 196 credits. Built with React & Tailwind CSS.
-        </p>
-      </footer>
+      {/* First-Time Login Onboarding Modal */}
+      <OnboardingModal
+        isOpen={!!store.studentId && !store.isOnboarded}
+        studentId={store.studentId}
+        initialTargetCgpa={store.targetCgpa}
+        onComplete={store.saveOnboardingProfile}
+      />
     </div>
   );
 }
