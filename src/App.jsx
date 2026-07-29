@@ -69,129 +69,76 @@ export default function App() {
           />
         ))}
 
-        <div className="w-full max-w-md p-8 glass-card border border-slate-200 dark:border-indigo-950/20 shadow-2xl relative z-10 mx-4 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(99,102,241,0.18)] dark:hover:shadow-[0_20px_50px_rgba(99,102,241,0.1)]">
+        <div className="w-full max-w-md p-8 glass-card border border-slate-200/80 dark:border-indigo-950/30 shadow-2xl relative z-10 mx-4 rounded-3xl transition-all duration-500">
+          
+          {/* Logo & Header */}
           <div className="text-center mb-8">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mx-auto shadow-lg shadow-indigo-500/35 mb-4 animate-bounce">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 flex items-center justify-center mx-auto shadow-xl shadow-indigo-500/25 mb-4">
               <GraduationCap size={28} className="text-white" />
             </div>
             <h1 className="text-2xl font-black gradient-text tracking-tight">BytePath</h1>
-            <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
-              Track CS & IT credits, predict CGPA targets, and organize student workflows.
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed font-medium">
+              B.Tech CS & IT Scholar Portal & Learning Management
             </p>
           </div>
           
-          <form onSubmit={handleLoginSubmit} className="space-y-5">
+          {/* Form Container */}
+          <form onSubmit={handleLoginSubmit} className="space-y-4">
             <div>
-              <div className="flex items-center justify-between mb-2">
-                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-550 dark:text-slate-500">
-                  University Roll Number / ID
-                </label>
-                <button
-                  type="button"
-                  onClick={() => {
-                    const branches = ['CSE', 'IT', 'AI', 'DS'];
-                    const branch = branches[Math.floor(Math.random() * branches.length)];
-                    const num = String(Math.floor(100 + Math.random() * 900));
-                    setRollInput(`BT/${branch}/2026/${num}`);
-                  }}
-                  className="text-[10px] font-bold text-indigo-500 hover:text-indigo-400 flex items-center gap-1 cursor-pointer transition-colors"
-                >
-                  <Sparkles size={11} /> Generate Unique ID
-                </button>
-              </div>
-
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                Email or Student Roll ID
+              </label>
               <input 
                 type="text" 
                 required
-                placeholder="e.g. BT/CSE/2026/042, BT/IT/2026/012 or 'admin'"
+                placeholder="e.g. BT/CSE/2026/042 or student@bytemail.edu"
                 value={rollInput}
                 onChange={(e) => setRollInput(e.target.value)}
-                className="app-input text-center text-base font-semibold shadow-sm"
+                className="app-input text-sm font-semibold shadow-sm py-3 px-4 rounded-xl"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                Password
+              </label>
+              <input 
+                type="password" 
+                required
+                placeholder="••••••••"
+                defaultValue="password123"
+                className="app-input text-sm font-semibold shadow-sm py-3 px-4 rounded-xl"
               />
             </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              <button 
-                type="submit" 
-                className="w-full btn-primary py-3 rounded-xl flex items-center justify-center gap-2 text-xs font-bold shadow-md cursor-pointer"
-              >
-                <span>Access Profile</span>
-                <ArrowRight size={14} />
-              </button>
-
-              <button 
-                type="button" 
-                onClick={() => {
-                  const branches = ['CSE', 'IT', 'AI', 'DS'];
-                  const branch = branches[Math.floor(Math.random() * branches.length)];
-                  const num = String(Math.floor(100 + Math.random() * 900));
-                  const generatedId = `BT/${branch}/2026/${num}`;
-                  setRollInput(generatedId);
-                  store.handleLogin(generatedId);
-                }}
-                className="w-full py-3 rounded-xl border border-indigo-500/30 bg-indigo-500/10 text-indigo-500 hover:bg-indigo-500 hover:text-white transition-all text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer"
-              >
-                <Sparkles size={13} />
-                <span>Auto-Generate & Enter</span>
-              </button>
-            </div>
+            <button 
+              type="submit" 
+              className="w-full btn-primary py-3.5 rounded-xl flex items-center justify-center gap-2 text-sm font-bold shadow-lg shadow-indigo-500/25 cursor-pointer mt-2"
+            >
+              <span>Sign In to Portal</span>
+              <ArrowRight size={16} />
+            </button>
           </form>
 
-          {/* 🔑 Quick Test Accounts Widget */}
-          <div className="mt-6 pt-4 border-t border-slate-200/80 dark:border-indigo-950/20 space-y-3">
-            <p className="text-[10px] uppercase font-bold tracking-widest text-slate-400 text-center">
-              🔑 Quick Test Account Credentials
-            </p>
-
-            <div className="grid grid-cols-2 gap-2 text-left">
-              {/* Test Student */}
-              <button
-                type="button"
-                onClick={() => {
-                  setRollInput('BT/CSE/2026/042');
-                  store.handleLogin('BT/CSE/2026/042');
-                }}
-                className="p-2.5 rounded-xl bg-slate-100/70 dark:bg-surface-700/40 border border-slate-200/60 dark:border-indigo-950/30 hover:border-indigo-500/50 transition-all text-left group cursor-pointer"
-              >
-                <div className="flex items-center justify-between text-[10px] font-bold text-indigo-500 mb-1">
-                  <span>Student Demo</span>
-                  <span className="text-[8px] bg-indigo-500/10 px-1 rounded">1-Click</span>
-                </div>
-                <div className="text-[10px] font-mono text-slate-700 dark:text-slate-300 truncate">
-                  student@bytemail.edu
-                </div>
-                <div className="text-[9px] text-slate-400 font-mono">
-                  Pass: <span className="font-semibold text-slate-500">Student@123</span>
-                </div>
-              </button>
-
-              {/* Test Admin */}
-              <button
-                type="button"
-                onClick={() => {
-                  setRollInput('admin');
-                  store.handleLogin('admin');
-                }}
-                className="p-2.5 rounded-xl bg-slate-100/70 dark:bg-surface-700/40 border border-slate-200/60 dark:border-indigo-950/30 hover:border-amber-500/50 transition-all text-left group cursor-pointer"
-              >
-                <div className="flex items-center justify-between text-[10px] font-bold text-amber-500 mb-1">
-                  <span>Admin Portal</span>
-                  <span className="text-[8px] bg-amber-500/10 px-1 rounded">1-Click</span>
-                </div>
-                <div className="text-[10px] font-mono text-slate-700 dark:text-slate-300 truncate">
-                  admin@bytemail.edu
-                </div>
-                <div className="text-[9px] text-slate-400 font-mono">
-                  Pass: <span className="font-semibold text-slate-500">Admin@123</span>
-                </div>
-              </button>
-            </div>
-
-            <div className="text-center text-[10px] text-slate-400 flex items-center justify-center gap-1">
-              <Shield size={11} className="text-indigo-400" />
-              <span>Click any test account box above to instantly log in.</span>
-            </div>
+          {/* Quick unique ID auto-fill link */}
+          <div className="mt-6 pt-4 border-t border-slate-100 dark:border-indigo-950/20 text-center text-xs text-slate-400 flex items-center justify-between">
+            <span className="text-[11px] text-slate-400">First time here?</span>
+            <button
+              type="button"
+              onClick={() => {
+                const branches = ['CSE', 'IT', 'AI', 'DS'];
+                const branch = branches[Math.floor(Math.random() * branches.length)];
+                const num = String(Math.floor(100 + Math.random() * 900));
+                const newId = `BT/${branch}/2026/${num}`;
+                setRollInput(newId);
+                store.handleLogin(newId);
+              }}
+              className="text-[11px] font-bold text-indigo-500 hover:text-indigo-400 flex items-center gap-1 cursor-pointer"
+            >
+              <Sparkles size={12} /> Generate ID & Enter
+            </button>
           </div>
+
         </div>
       </div>
     );
