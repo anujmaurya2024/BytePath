@@ -44,7 +44,7 @@ export default function App() {
     }
   };
 
-  // 1. LOGIN GATEWAY VIEW
+
   if (!store.studentId) {
     return (
       <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-slate-50 dark:bg-[#05050c] text-slate-800 dark:text-slate-200 transition-colors duration-500">
