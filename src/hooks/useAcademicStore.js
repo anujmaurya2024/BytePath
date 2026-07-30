@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { SYLLABUS, TOTAL_PROGRAM_CREDITS } from '../data/syllabus';
+import { clearActiveSession } from '../services/authApi';
 
 // ---- Storage Helpers (Standard hooks to keep state persisted) ----
 const getStorageItem = (key, fallback) => {
@@ -235,13 +236,21 @@ export function useAcademicStore() {
   }, [advisorChat]);
 
   // ---- Auth handlers ----
-  const handleLogin = useCallback((rollNum) => {
-    if (rollNum.trim()) {
-      setStudentId(rollNum);
+  const handleLogin = useCallback((account) => {
+    const loginId = typeof account === 'string' ? account : account?.loginId;
+    const name = typeof account === 'string' ? '' : account?.name;
+
+    if (loginId?.trim()) {
+      setStudentId(loginId.trim());
+      if (name?.trim()) {
+        localStorage.setItem('studentName', name.trim());
+        setStudentName(name.trim());
+      }
     }
   }, []);
 
   const handleLogout = useCallback(() => {
+    clearActiveSession();
     setStudentId('');
   }, []);
 

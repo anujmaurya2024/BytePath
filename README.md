@@ -25,6 +25,20 @@ npm run dev
 
 Open **http://localhost:5173** in your browser.
 
+## Authentication API
+
+The login page issues a unique `BTP-YYYY-XXXXXX` ID for every new account. Students can later sign in with that ID or the Google account email used at registration, plus their password.
+
+For local development, accounts are stored in the browser. To use a real authentication server, copy `.env.example` to `.env` and set `VITE_AUTH_API_URL`. The app then calls these JSON endpoints:
+
+| Endpoint | Request body | Success response |
+|---|---|---|
+| `POST /auth/register` | `{ name, email, password }` | `{ loginId, name, email }` |
+| `POST /auth/login` | `{ identity, password }` | `{ loginId, name, email }` |
+| `POST /auth/google` | `{ credential }` | `{ loginId, name, email }` |
+
+The server must hash passwords and verify any Google credential with Google before creating a session. Do not put Google OAuth secrets in the Vite client.
+
 ---
 
 ## ✨ Features
