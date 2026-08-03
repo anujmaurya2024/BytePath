@@ -125,21 +125,21 @@ export default function App() {
               <GraduationCap size={28} className="text-white" />
             </div>
             <h1 className="text-2xl font-black gradient-text tracking-tight">BytePath</h1>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed font-medium">
-              Your secure B.Tech study portal
+            <p className="text-sm text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed font-medium">
+              Plan your B.Tech semester with clarity
             </p>
           </div>
           
           <div className="grid grid-cols-2 rounded-xl bg-slate-100/80 dark:bg-white/[0.04] p-1 mb-6" role="tablist" aria-label="Authentication options">
-            <button type="button" onClick={() => switchAuthMode('signin')} className={`rounded-lg py-2 text-xs font-bold transition ${authMode === 'signin' ? 'bg-white dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-200 shadow-sm' : 'text-slate-500 dark:text-slate-400'}`} role="tab" aria-selected={authMode === 'signin'}>Sign in</button>
-            <button type="button" onClick={() => switchAuthMode('signup')} className={`rounded-lg py-2 text-xs font-bold transition ${authMode === 'signup' ? 'bg-white dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-200 shadow-sm' : 'text-slate-500 dark:text-slate-400'}`} role="tab" aria-selected={authMode === 'signup'}>Create account</button>
+            <button type="button" onClick={() => switchAuthMode('signin')} className={`min-h-10 rounded-lg py-2 text-sm font-bold transition ${authMode === 'signin' ? 'bg-white dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-200 shadow-sm' : 'text-slate-500 dark:text-slate-400'}`} role="tab" aria-selected={authMode === 'signin'}>Sign in</button>
+            <button type="button" onClick={() => switchAuthMode('signup')} className={`min-h-10 rounded-lg py-2 text-sm font-bold transition ${authMode === 'signup' ? 'bg-white dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-200 shadow-sm' : 'text-slate-500 dark:text-slate-400'}`} role="tab" aria-selected={authMode === 'signup'}>Create account</button>
           </div>
 
           {/* Form Container */}
           <form onSubmit={handleLoginSubmit} className="space-y-4">
             {authMode === 'signup' && (
               <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5" htmlFor="full-name">Full name</label>
+                <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1.5" htmlFor="full-name">Full name</label>
                 <div className="relative">
                   <UserRound size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
                   <input id="full-name" type="text" required autoComplete="name" placeholder="Your full name" value={name} onChange={(e) => setName(e.target.value)} className="app-input text-sm font-semibold shadow-sm py-3 pl-10 pr-4 rounded-xl" />
@@ -147,7 +147,7 @@ export default function App() {
               </div>
             )}
             <div>
-              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5" htmlFor="account-identity">
+              <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1.5" htmlFor="account-identity">
                 {authMode === 'signup' ? 'Google account email' : 'Unique ID or Google account email'}
               </label>
               <div className="relative">
@@ -157,7 +157,7 @@ export default function App() {
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5" htmlFor="account-password">
+              <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1.5" htmlFor="account-password">
                 BytePath password
               </label>
               <input 
@@ -173,7 +173,7 @@ export default function App() {
               />
             </div>
             {authError && (
-              <p className="rounded-xl border border-rose-500/20 bg-rose-500/10 px-3 py-2.5 text-xs font-medium text-rose-600 dark:text-rose-300" role="alert">
+              <p className="rounded-xl border border-rose-500/20 bg-rose-500/10 px-3 py-2.5 text-sm font-medium text-rose-600 dark:text-rose-300" role="alert">
                 {authError}
               </p>
             )}
@@ -207,12 +207,12 @@ export default function App() {
           )}
 
           {/* Quick unique ID auto-fill link */}
-          <div className="mt-6 pt-4 border-t border-slate-100 dark:border-indigo-950/20 text-center text-xs text-slate-400 flex items-center justify-between">
-            <span className="text-[11px] text-slate-400">{authMode === 'signin' ? 'First time here?' : 'Already registered?'}</span>
+          <div className="mt-6 pt-4 border-t border-slate-100 dark:border-indigo-950/20 text-center text-sm text-slate-400 flex items-center justify-between gap-3">
+            <span>{authMode === 'signin' ? 'First time here?' : 'Already registered?'}</span>
             <button
               type="button"
               onClick={() => switchAuthMode(authMode === 'signin' ? 'signup' : 'signin')}
-              className="text-[11px] font-bold text-indigo-500 hover:text-indigo-400 flex items-center gap-1 cursor-pointer"
+              className="font-bold text-indigo-500 hover:text-indigo-400 flex items-center gap-1 cursor-pointer"
             >
               {authMode === 'signin' ? 'Create an account' : 'Already have an account? Sign in'}
             </button>
@@ -226,6 +226,7 @@ export default function App() {
   // 2. MAIN HUB APPARATUS WITH LEFT SIDEBAR LAYOUT
   return (
     <div className="min-h-screen relative bg-slate-50 dark:bg-[#05050a] text-slate-800 dark:text-slate-200 transition-colors duration-500 overflow-x-hidden flex">
+      <a className="skip-link" href="#main-content">Skip to main content</a>
       {/* Ambient glowing background blobs */}
       <div className="fixed top-[-15%] left-[-15%] w-[60%] h-[60%] rounded-full bg-indigo-500/10 dark:bg-indigo-500/5 blur-[130px] pointer-events-none animate-pulse-slow"></div>
       <div className="fixed bottom-[-15%] right-[-15%] w-[60%] h-[60%] rounded-full bg-purple-500/10 dark:bg-purple-500/5 blur-[130px] pointer-events-none animate-pulse-slow"></div>
@@ -279,7 +280,7 @@ export default function App() {
         />
 
         {/* Dynamic Workspace Container */}
-        <main className="max-w-7xl mx-auto px-4 sm:px-8 py-8 flex-1 w-full space-y-6">
+        <main id="main-content" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-8 flex-1 w-full space-y-6" tabIndex="-1">
           {store.activeTab === 'dashboard' && (
             <Dashboard 
               chartData={store.chartData}
@@ -388,7 +389,7 @@ export default function App() {
         </main>
 
         {/* Global Footer */}
-        <footer className="border-t border-slate-200/80 dark:border-indigo-950/30 py-6 text-center text-[10px] text-slate-400 relative z-10 shrink-0 mt-auto">
+        <footer className="border-t border-slate-200/80 dark:border-indigo-950/30 py-6 text-center text-xs text-slate-400 relative z-10 shrink-0 mt-auto">
           <p>© 2026 BytePath B.Tech CS & IT Scholar Hub. Integrated 196-Credit Curriculum.</p>
         </footer>
       </div>

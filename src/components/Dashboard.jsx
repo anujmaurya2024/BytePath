@@ -3,7 +3,7 @@ import {
   AreaChart, Area, Line, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, ReferenceLine, ComposedChart
 } from 'recharts';
-import { Award, BookOpen, Target, TrendingUp, Star, Clock, Brain, Landmark } from 'lucide-react';
+import { Award, BookOpen, Target, TrendingUp, Star, Brain, Landmark, ArrowUpRight, CalendarDays, ClipboardCheck, SlidersHorizontal, Timer } from 'lucide-react';
 import { TOTAL_PROGRAM_CREDITS, SYLLABUS } from '../data/syllabus';
 
 // ---- Custom Chart Tooltip ----
@@ -31,22 +31,26 @@ function CustomTooltip({ active, payload, label }) {
 
 // ---- Stat Card Component ----
 function StatCard({ icon: Icon, label, value, sub, colorClass, borderClass, onClick }) {
+  const Component = onClick ? 'button' : 'div';
+
   return (
-    <div 
+    <Component
+      type={onClick ? 'button' : undefined}
       onClick={onClick}
-      className={`glass-card glass-card-hover shine-effect p-5 flex flex-col justify-between float-card border ${borderClass} ${onClick ? 'cursor-pointer' : ''}`}
+      className={`glass-card glass-card-hover shine-effect p-5 flex flex-col justify-between border text-left ${borderClass} ${onClick ? 'cursor-pointer w-full' : ''}`}
     >
       <div className="flex items-center justify-between mb-4">
-        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{label}</span>
+        <span className="text-xs font-bold uppercase tracking-wider text-slate-500">{label}</span>
         <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${colorClass}`}>
           <Icon size={16} className="text-white" />
         </div>
       </div>
       <div>
-        <p className="text-3xl font-extrabold text-slate-800 dark:text-white tracking-tight">{value}</p>
-        <p className="text-[11px] text-slate-500 mt-1 truncate">{sub}</p>
+        <p className="text-3xl font-extrabold text-slate-800 dark:text-white tracking-tight tabular-nums">{value}</p>
+        <p className="text-xs text-slate-500 mt-1.5 truncate">{sub}</p>
       </div>
-    </div>
+      {onClick && <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-indigo-600 dark:text-indigo-400">View details <ArrowUpRight size={14} /></span>}
+    </Component>
   );
 }
 
@@ -156,6 +160,9 @@ export default function Dashboard({
               <p className="text-xs text-slate-500 max-w-xs mt-1.5 leading-relaxed">
                 Head over to the <span className="text-indigo-500 font-bold cursor-pointer" onClick={() => setActiveTab('semesters')}>Semesters</span> tab and enter some SGPAs to generate your growth charts.
               </p>
+              <button type="button" onClick={() => setActiveTab('semesters')} className="mt-4 text-sm font-bold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400">
+                Add semester grades <ArrowUpRight size={15} className="inline" />
+              </button>
             </div>
           ) : (
             <div className="h-64 sm:h-72">
@@ -238,7 +245,7 @@ export default function Dashboard({
                   style={{ width: `${creditsPct}%`, background: 'var(--gradient-success)' }}
                 />
               </div>
-              <div className="flex justify-between text-[10px] text-slate-500 mt-2">
+              <div className="flex justify-between text-xs text-slate-500 mt-2">
                 <span>0 Credits</span>
                 <span className="font-bold text-slate-600 dark:text-slate-400">{earnedCredits} Completed</span>
                 <span>{TOTAL_PROGRAM_CREDITS} cr</span>
@@ -255,7 +262,7 @@ export default function Dashboard({
                     <div 
                       className={`w-full h-1.5 rounded-full transition-all duration-300 ${isCompleted ? 'bg-emerald-500 shadow-md shadow-emerald-500/20' : 'bg-slate-200 dark:bg-surface-500'}`}
                     />
-                    <span className="text-[9px] font-bold text-slate-500 mt-1">S{sem.semester}</span>
+                    <span className="text-[11px] font-bold text-slate-500 mt-1">S{sem.semester}</span>
                   </div>
                 );
               })}
@@ -271,24 +278,24 @@ export default function Dashboard({
             
             <div className="grid grid-cols-2 gap-3">
               {/* Focus snapshot */}
-              <div className="bg-slate-50 dark:bg-surface-700/30 border border-slate-150 dark:border-indigo-950/10 p-3.5 rounded-xl text-center cursor-pointer" onClick={() => setActiveTab('focus')}>
+              <button type="button" className="bg-slate-50 dark:bg-surface-700/30 border border-slate-150 dark:border-indigo-950/10 p-3.5 rounded-xl text-center cursor-pointer hover:border-indigo-500/30 transition-colors" onClick={() => setActiveTab('focus')}>
                 <div className="flex items-center justify-center gap-1.5 text-slate-500 mb-1">
                   <Brain size={12} className="text-purple-500" />
-                  <span className="text-[10px] font-bold uppercase tracking-wider">Mind Focus</span>
+                  <span className="text-xs font-bold uppercase tracking-wider">Mind Focus</span>
                 </div>
                 <p className="text-xl font-extrabold text-slate-800 dark:text-white font-mono">{focusHrs} hrs</p>
-                <p className="text-[9px] text-slate-500 mt-0.5">Total study sessions</p>
-              </div>
+                <p className="text-[11px] text-slate-500 mt-0.5">Total study sessions</p>
+              </button>
 
               {/* Expense snapshot */}
-              <div className="bg-slate-50 dark:bg-surface-700/30 border border-slate-150 dark:border-indigo-950/10 p-3.5 rounded-xl text-center cursor-pointer" onClick={() => setActiveTab('expenses')}>
+              <button type="button" className="bg-slate-50 dark:bg-surface-700/30 border border-slate-150 dark:border-indigo-950/10 p-3.5 rounded-xl text-center cursor-pointer hover:border-indigo-500/30 transition-colors" onClick={() => setActiveTab('expenses')}>
                 <div className="flex items-center justify-center gap-1.5 text-slate-500 mb-1">
                   <Landmark size={12} className="text-rose-500" />
                   <span className="text-[10px] font-bold uppercase tracking-wider">Expense</span>
                 </div>
                 <p className="text-xl font-extrabold text-slate-800 dark:text-white font-mono">₹{thisMonthExpenses}</p>
                 <p className="text-[9px] text-slate-500 mt-0.5">{budgetProgress.toFixed(0)}% of monthly</p>
-              </div>
+              </button>
             </div>
           </div>
         </div>

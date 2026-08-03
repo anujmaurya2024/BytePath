@@ -27,14 +27,14 @@ export default function TopHeader({
   const tabInfo = TAB_TITLES[activeTab] || { title: 'BytePath Hub', subtitle: 'CS & IT Scholar Portal' };
 
   return (
-    <header className="sticky top-0 z-30 bg-white/80 dark:bg-[#070712]/80 backdrop-blur-xl border-b border-slate-200/80 dark:border-indigo-950/40 px-4 sm:px-8 py-3.5 transition-all">
+    <header className="sticky top-0 z-30 bg-white/90 dark:bg-[#070712]/90 backdrop-blur-xl border-b border-slate-200/80 dark:border-indigo-950/40 px-4 sm:px-6 lg:px-8 py-3.5 transition-all">
       <div className="flex items-center justify-between gap-4 max-w-7xl mx-auto">
         
         {/* Left: Mobile Toggle & Page Title */}
         <div className="flex items-center gap-3">
           <button
             onClick={onOpenSidebar}
-            className="md:hidden p-2 rounded-xl bg-slate-100 dark:bg-surface-700 text-slate-600 dark:text-slate-200 hover:text-indigo-500 transition-colors"
+            className="md:hidden w-10 h-10 rounded-xl bg-slate-100 dark:bg-surface-700 text-slate-600 dark:text-slate-200 hover:text-indigo-500 transition-colors"
             aria-label="Open Sidebar"
           >
             <Menu size={20} />
@@ -42,9 +42,9 @@ export default function TopHeader({
 
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100 tracking-tight">
+              <h1 className="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100 tracking-tight leading-tight">
                 {tabInfo.title}
-              </h2>
+              </h1>
               {activeTab === 'advisor' && (
                 <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white animate-pulse">
                   <Sparkles size={10} /> AI Active
@@ -78,8 +78,10 @@ export default function TopHeader({
           {/* Theme Toggle Button */}
           <button
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="w-9 h-9 rounded-xl border border-slate-200 dark:border-indigo-950/40 bg-white/70 dark:bg-surface-700/60 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-indigo-500 dark:hover:text-indigo-400 hover:scale-105 transition-all cursor-pointer shadow-sm"
+            className="w-10 h-10 rounded-xl border border-slate-200 dark:border-indigo-950/40 bg-white/70 dark:bg-surface-700/60 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-indigo-500 dark:hover:text-indigo-400 hover:scale-105 transition-all cursor-pointer shadow-sm"
             title="Toggle Light/Dark Theme"
+            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+            aria-pressed={theme === 'dark'}
           >
             {theme === 'dark' ? <Sun size={16} className="text-amber-400" /> : <Moon size={16} className="text-indigo-500" />}
           </button>
@@ -87,8 +89,9 @@ export default function TopHeader({
           {/* Logout Button */}
           <button
             onClick={handleLogout}
-            className="w-9 h-9 rounded-xl border border-rose-200 dark:border-rose-900/30 bg-rose-500/10 hover:bg-rose-500 text-rose-500 hover:text-white flex items-center justify-center transition-all cursor-pointer font-semibold shadow-sm"
+            className="w-10 h-10 rounded-xl border border-rose-200 dark:border-rose-900/30 bg-rose-500/10 hover:bg-rose-500 text-rose-500 hover:text-white flex items-center justify-center transition-all cursor-pointer font-semibold shadow-sm"
             title="Sign Out"
+            aria-label="Sign out"
           >
             <LogOut size={15} />
           </button>

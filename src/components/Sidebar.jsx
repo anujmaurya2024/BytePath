@@ -121,6 +121,7 @@ export default function Sidebar({
             <button 
               onClick={() => setIsOpen(false)}
               className="md:hidden p-2 rounded-xl text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"
+              aria-label="Close navigation"
             >
               <X size={20} />
             </button>
@@ -217,7 +218,7 @@ export default function Sidebar({
           </div>
 
           {/* 3. GROUPED NAVIGATION SECTIONS */}
-          <div className="space-y-5">
+          <nav className="space-y-5" aria-label="Primary navigation">
             {NAV_SECTIONS.map((section, idx) => (
               <div key={idx} className="space-y-1">
                 <p className="text-[10px] uppercase font-bold tracking-widest text-slate-400 dark:text-slate-500 px-3 mb-1.5">
@@ -236,6 +237,7 @@ export default function Sidebar({
                           setActiveTab(id);
                           setIsOpen(false);
                         }}
+                        aria-current={isActive ? 'page' : undefined}
                         className={`
                           w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold
                           transition-all duration-200 cursor-pointer group relative overflow-hidden
@@ -267,7 +269,7 @@ export default function Sidebar({
                 </div>
               </div>
             ))}
-          </div>
+          </nav>
 
         </div>
 
