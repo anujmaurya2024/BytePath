@@ -10,8 +10,6 @@ import {
   CheckCircle2, 
   ArrowRight, 
   X, 
-  Zap, 
-  ShieldCheck, 
   Github, 
   Twitter 
 } from 'lucide-react';
@@ -144,31 +142,7 @@ export default function LoginPage({ onLoginSuccess }) {
     }
   };
 
-  const handleQuickDemoStudent = async () => {
-    setIsSubmitting(true);
-    setAuthError('');
-    try {
-      let session;
-      try {
-        session = await signIn({ identity: 'BTP-2026-CS8899', password: 'demo-student-pass' });
-      } catch {
-        session = await registerAccount({
-          name: 'Aarav Sharma',
-          email: 'aarav.cs2026@gmail.com',
-          password: 'demo-student-pass'
-        });
-      }
-      onLoginSuccess(session);
-    } catch {
-      onLoginSuccess({ loginId: 'BTP-2026-CS8899', name: 'Aarav Sharma', email: 'aarav.cs2026@gmail.com' });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
-  const handleQuickDemoAdmin = () => {
-    onLoginSuccess({ loginId: 'admin', name: 'System Admin', email: 'admin@bytepath.edu' });
-  };
 
   return (
     <div className="min-h-screen bg-[#e6ecf5] dark:bg-[#0c0e1a] text-slate-700 dark:text-slate-200 flex items-center justify-center p-4 sm:p-6 transition-colors duration-500 font-sans">
@@ -361,24 +335,7 @@ export default function LoginPage({ onLoginSuccess }) {
           </button>
         </div>
 
-        {/* Quick Demo Shortcuts */}
-        <div className="pt-2 border-t border-slate-300/50 dark:border-slate-800/80 flex items-center justify-center gap-3">
-          <button
-            onClick={handleQuickDemoStudent}
-            className="px-3 py-1.5 neu-button text-[11px] font-bold text-indigo-600 dark:text-indigo-300 flex items-center gap-1.5"
-          >
-            <Zap size={12} className="text-amber-500" />
-            <span>Student Demo</span>
-          </button>
 
-          <button
-            onClick={handleQuickDemoAdmin}
-            className="px-3 py-1.5 neu-button text-[11px] font-bold text-purple-600 dark:text-purple-300 flex items-center gap-1.5"
-          >
-            <ShieldCheck size={12} className="text-purple-500" />
-            <span>Admin Console</span>
-          </button>
-        </div>
 
       </div>
 
