@@ -236,11 +236,11 @@ export default function SemestersPanel({
   setAttendanceLogs
 }) {
   const [filter, setFilter] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
   const [expandedSem, setExpandedSem] = useState(1);
 
   // Quick subject attendance log handler
   const handleQuickLog = (courseCode, status) => {
-    // Current semester is determined by which semester the course belongs to
     let semNum = 1;
     for (let sem of SYLLABUS) {
       if (sem.courses.some(c => c.code === courseCode)) {
@@ -263,18 +263,21 @@ export default function SemestersPanel({
   const filteredSemesters = SYLLABUS.filter(sem => {
     const sgpaVal = pastSgpas[sem.semester];
     const isDone = sgpaVal !== '' && sgpaVal !== undefined;
-    if (filter === 'all') return true;
-    if (filter === 'complete') return isDone;
-    if (filter === 'upcoming') return !isDone;
-    return true;
+    const matchesFilter = filter === 'all' || (filter === 'complete' && isDone) || (filter === 'upcoming' && !isDone);
+    
+    if (!matchesFilter) return false;
+
+    if (!searchTerm.trim()) return true;
+    const term = searchTerm.toLowerCase().trim();
+    return sem.courses.some(c => c.title.toLowerCase().includes(term) || c.code.toLowerCase().includes(term));
   });
 
   return (
     <div className="space-y-6 animate-fade-in">
-      {/* Category filters */}
-      <div className="glass-card p-4 flex items-center justify-between flex-wrap gap-4 border border-slate-200 dark:border-indigo-950/20">
+      {/* Category & Search Filter Bar */}
+      <div className="glass-card p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 border border-slate-200 dark:border-indigo-950/20">
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-xs text-slate-500 font-bold uppercase tracking-wider mr-1">Filter Semester status:</span>
+          <span className="text-xs text-slate-500 font-bold uppercase tracking-wider mr-1">Filter:</span>
           {[
             { value: 'all', label: 'All Semesters' },
             { value: 'complete', label: 'Completed Only' },
@@ -295,9 +298,20 @@ export default function SemestersPanel({
             </button>
           ))}
         </div>
-        <span className="text-xs text-slate-500 font-bold font-mono">
-          Completed: {Object.values(pastSgpas).filter(v => v !== '').length} / 8
-        </span>
+
+        {/* Live Course Search */}
+        <div className="flex items-center gap-3">
+          <input
+            type="text"
+            placeholder="Search course title or code..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="app-input text-xs font-medium py-1.5 px-3 rounded-xl max-w-xs"
+          />
+          <span className="text-xs text-slate-500 font-bold font-mono shrink-0">
+            {Object.values(pastSgpas).filter(v => v !== '').length} / 8 Complete
+          </span>
+        </div>
       </div>
 
       {/* Expandable semester cards */}

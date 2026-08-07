@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, Sun, Moon, LogOut, GraduationCap, Bell, Shield, Sparkles } from 'lucide-react';
+import { Menu, Sun, Moon, LogOut, Search, Sparkles } from 'lucide-react';
 
 const TAB_TITLES = {
   dashboard: { title: 'Academic Dashboard', subtitle: 'CGPA trajectory, credit weightage, and semester analytics' },
@@ -22,7 +22,8 @@ export default function TopHeader({
   theme,
   setTheme,
   handleLogout,
-  onOpenSidebar
+  onOpenSidebar,
+  onOpenSearch
 }) {
   const tabInfo = TAB_TITLES[activeTab] || { title: 'BytePath Hub', subtitle: 'CS & IT Scholar Portal' };
 
@@ -57,8 +58,21 @@ export default function TopHeader({
           </div>
         </div>
 
-        {/* Right: Quick Metrics & Actions */}
+        {/* Center/Right: Global Search Button & Quick Metrics */}
         <div className="flex items-center gap-2 sm:gap-3">
+          
+          {/* Quick Search Button */}
+          <button
+            onClick={onOpenSearch}
+            className="flex items-center gap-2.5 px-3 sm:px-4 py-2 rounded-xl bg-slate-100 dark:bg-surface-700/60 border border-slate-200 dark:border-indigo-950/50 text-slate-500 dark:text-slate-300 hover:border-indigo-500 text-xs font-medium transition cursor-pointer shadow-sm"
+          >
+            <Search size={15} className="text-indigo-500" />
+            <span className="hidden sm:inline">Search courses, tools...</span>
+            <kbd className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-400">
+              ⌘K
+            </kbd>
+          </button>
+
           {/* Quick Roll ID */}
           <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100/70 dark:bg-surface-700/40 border border-slate-200/60 dark:border-indigo-950/40">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
@@ -101,3 +115,4 @@ export default function TopHeader({
     </header>
   );
 }
+
