@@ -92,8 +92,8 @@ export default function Sidebar({
 
       {/* Main Sidebar Container */}
       <aside className={`
-        fixed top-0 bottom-0 left-0 z-50 w-80 bg-white/95 dark:bg-[#070712]/95 backdrop-blur-2xl
-        border-r border-slate-200/80 dark:border-indigo-950/40 flex flex-col justify-between
+        fixed top-0 bottom-0 left-0 z-50 w-80 bg-[#e6ecf5] dark:bg-[#0c0e1a] neu-flat
+        border-r border-slate-300/30 dark:border-slate-800 flex flex-col justify-between
         transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
       `}>
@@ -103,13 +103,13 @@ export default function Sidebar({
           {/* 1. Header / Logo */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/25">
-                <GraduationCap size={24} className="text-white" />
+              <div className="w-11 h-11 neu-circle flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+                <GraduationCap size={24} />
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <h1 className="text-xl font-black gradient-text tracking-tight">BytePath</h1>
-                  <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-indigo-500/10 text-indigo-500 border border-indigo-500/20">
+                  <h1 className="text-xl font-black text-slate-800 dark:text-slate-100 tracking-tight">BytePath</h1>
+                  <span className="text-[9px] font-bold px-1.5 py-0.5 rounded neu-button text-indigo-600 dark:text-indigo-300">
                     v2.0
                   </span>
                 </div>
@@ -120,21 +120,18 @@ export default function Sidebar({
             {/* Mobile close button */}
             <button 
               onClick={() => setIsOpen(false)}
-              className="md:hidden p-2 rounded-xl text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"
+              className="md:hidden p-2 rounded-xl neu-button text-slate-400 hover:text-slate-600"
               aria-label="Close navigation"
             >
               <X size={20} />
             </button>
           </div>
 
-          {/* 2. STUDENT INFO CARD (Pinnacle of Left-Side Info) */}
-          <div className="p-4 rounded-2xl glass-card border border-indigo-500/20 bg-gradient-to-br from-indigo-500/5 via-purple-500/5 to-transparent relative overflow-hidden">
-            {/* Ambient Background Glow */}
-            <div className="absolute -top-10 -right-10 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none" />
-
-            <div className="flex items-center justify-between mb-3">
+          {/* 2. STUDENT INFO CARD */}
+          <div className="p-4 neu-flat relative overflow-hidden space-y-3">
+            <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-xs shadow-md">
+                <div className="w-9 h-9 neu-circle flex items-center justify-center text-slate-700 dark:text-slate-200 font-bold text-xs">
                   {studentName ? studentName.substring(0, 2).toUpperCase() : studentId ? studentId.substring(0, 2).toUpperCase() : 'ST'}
                 </div>
                 <div>
@@ -153,35 +150,35 @@ export default function Sidebar({
             </div>
 
             {/* CGPA & Target Metrics */}
-            <div className="grid grid-cols-2 gap-2 my-3">
-              <div className="p-2.5 rounded-xl bg-white/70 dark:bg-surface-700/40 border border-slate-200/50 dark:border-indigo-950/40 text-center">
+            <div className="grid grid-cols-2 gap-2 my-2">
+              <div className="p-2.5 rounded-xl neu-inset text-center">
                 <div className="flex items-center justify-center gap-1 text-[9px] font-bold uppercase text-slate-400 mb-0.5">
-                  <Award size={11} className="text-indigo-400" /> Current
+                  <Award size={11} className="text-indigo-500" /> Current
                 </div>
-                <div className={`text-base font-black gradient-text`}>
+                <div className="text-sm font-black text-indigo-600 dark:text-indigo-300">
                   {currentCgpa > 0 ? currentCgpa : 'N/A'}
                 </div>
               </div>
 
-              <div className="p-2.5 rounded-xl bg-white/70 dark:bg-surface-700/40 border border-slate-200/50 dark:border-indigo-950/40 text-center">
+              <div className="p-2.5 rounded-xl neu-inset text-center">
                 <div className="flex items-center justify-center gap-1 text-[9px] font-bold uppercase text-slate-400 mb-0.5">
-                  <Target size={11} className="text-amber-400" /> Target
+                  <Target size={11} className="text-amber-500" /> Target
                 </div>
-                <div className="text-base font-black text-amber-500 dark:text-amber-400">
+                <div className="text-sm font-black text-amber-500">
                   {targetCgpa || '8.50'}
                 </div>
               </div>
             </div>
 
             {/* Credit Progress Meter */}
-            <div className="space-y-1.5 pt-1 border-t border-slate-200/40 dark:border-indigo-950/30">
+            <div className="space-y-1.5 pt-1 border-t border-slate-300/40 dark:border-slate-800">
               <div className="flex justify-between items-center text-[10px]">
                 <span className="text-slate-400 font-semibold">Degree Progress</span>
-                <span className="font-mono font-bold text-indigo-500 dark:text-indigo-400">
+                <span className="font-mono font-bold text-indigo-600 dark:text-indigo-300">
                   {earnedCredits}/{TOTAL_PROGRAM_CREDITS} CR ({creditsPct.toFixed(0)}%)
                 </span>
               </div>
-              <div className="w-full h-2 rounded-full bg-slate-200 dark:bg-surface-600/40 overflow-hidden">
+              <div className="w-full h-2 rounded-full neu-inset overflow-hidden p-0.5">
                 <div 
                   className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full transition-all duration-500"
                   style={{ width: `${creditsPct}%` }}
@@ -190,25 +187,25 @@ export default function Sidebar({
             </div>
 
             {/* Attendance & Subscription indicators */}
-            <div className="mt-2.5 space-y-1.5 pt-1.5 border-t border-slate-200/40 dark:border-indigo-950/30 text-[10px]">
+            <div className="mt-2 space-y-1 pt-1.5 border-t border-slate-300/40 dark:border-slate-800 text-[10px]">
               <div className="flex items-center justify-between text-slate-400">
                 <span className="flex items-center gap-1 font-medium">
-                  <CheckCircle2 size={12} className={calculatedAttendancePercent >= 75 ? "text-emerald-400" : "text-amber-400"} />
+                  <CheckCircle2 size={12} className={calculatedAttendancePercent >= 75 ? "text-emerald-500" : "text-amber-500"} />
                   Attendance:
                 </span>
-                <span className={`font-bold ${calculatedAttendancePercent >= 75 ? "text-emerald-500 dark:text-emerald-400" : "text-amber-500"}`}>
+                <span className={`font-bold ${calculatedAttendancePercent >= 75 ? "text-emerald-600 dark:text-emerald-400" : "text-amber-500"}`}>
                   {calculatedAttendancePercent}%
                 </span>
               </div>
 
               <div className="flex items-center justify-between text-slate-400">
                 <span className="flex items-center gap-1 font-medium">
-                  <Sparkles size={12} className={hasEndSemSubscription ? "text-emerald-400" : "text-amber-400"} />
+                  <Sparkles size={12} className={hasEndSemSubscription ? "text-emerald-500" : "text-amber-500"} />
                   End-Sem Pass:
                 </span>
                 <span className={`font-bold px-1.5 py-0.2 rounded text-[9px] ${
                   hasEndSemSubscription 
-                    ? "bg-emerald-500/20 text-emerald-500 dark:text-emerald-400" 
+                    ? "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400" 
                     : "bg-amber-500/20 text-amber-500"
                 }`}>
                   {hasEndSemSubscription ? "VIP ACTIVE 🌟" : "UPGRADE (₹99)"}
@@ -220,12 +217,12 @@ export default function Sidebar({
           {/* 3. GROUPED NAVIGATION SECTIONS */}
           <nav className="space-y-5" aria-label="Primary navigation">
             {NAV_SECTIONS.map((section, idx) => (
-              <div key={idx} className="space-y-1">
+              <div key={idx} className="space-y-1.5">
                 <p className="text-[10px] uppercase font-bold tracking-widest text-slate-400 dark:text-slate-500 px-3 mb-1.5">
                   {section.title}
                 </p>
                 
-                <div className="space-y-0.5">
+                <div className="space-y-1.5">
                   {section.items.map(({ id, label, icon: Icon, adminOnly }) => {
                     if (adminOnly && !isAdmin) return null;
                     const isActive = activeTab === id;
@@ -239,20 +236,20 @@ export default function Sidebar({
                         }}
                         aria-current={isActive ? 'page' : undefined}
                         className={`
-                          w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold
+                          w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-xs font-semibold
                           transition-all duration-200 cursor-pointer group relative overflow-hidden
                           ${isActive 
-                            ? 'bg-gradient-to-r from-indigo-500/15 via-purple-500/10 to-transparent text-indigo-600 dark:text-indigo-300 font-bold border border-indigo-500/30 shadow-sm' 
-                            : 'text-slate-600 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-slate-200 hover:bg-slate-100/70 dark:hover:bg-surface-700/50'
+                            ? 'neu-button-active text-indigo-600 dark:text-indigo-300 font-bold' 
+                            : 'neu-button text-slate-600 dark:text-slate-300 hover:text-indigo-600'
                           }
                         `}
                       >
                         <div className="flex items-center gap-3 relative z-10">
                           <div className={`
-                            p-1.5 rounded-lg transition-colors
+                            p-1.5 rounded-xl transition-colors
                             ${isActive 
-                              ? 'bg-indigo-500 text-white shadow-md shadow-indigo-500/30' 
-                              : 'bg-slate-100 dark:bg-surface-700 text-slate-500 dark:text-slate-400 group-hover:text-indigo-500 dark:group-hover:text-indigo-400'
+                              ? 'text-indigo-600 dark:text-indigo-300' 
+                              : 'text-slate-500 dark:text-slate-400 group-hover:text-indigo-500'
                             }
                           `}>
                             <Icon size={15} />
@@ -274,20 +271,20 @@ export default function Sidebar({
         </div>
 
         {/* 4. SIDEBAR FOOTER (Theme & Logout) */}
-        <div className="p-4 border-t border-slate-200/80 dark:border-indigo-950/40 space-y-2 bg-slate-50/50 dark:bg-[#090915]/50">
+        <div className="p-4 border-t border-slate-300/40 dark:border-slate-800 space-y-2 bg-[#e6ecf5] dark:bg-[#0c0e1a]">
           <div className="grid grid-cols-2 gap-2">
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-slate-200 dark:border-indigo-950/50 bg-white dark:bg-surface-700 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:border-indigo-500 transition-all cursor-pointer shadow-sm"
+              className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl neu-button text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-indigo-600 transition-all cursor-pointer"
               title="Toggle Theme"
             >
               {theme === 'dark' ? <Sun size={15} className="text-amber-400" /> : <Moon size={15} className="text-indigo-500" />}
-              <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+              <span>{theme === 'dark' ? 'Light' : 'Dark'}</span>
             </button>
 
             <button
               onClick={handleLogout}
-              className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-rose-200 dark:border-rose-900/30 bg-rose-500/10 text-xs font-semibold text-rose-500 hover:bg-rose-500 hover:text-white transition-all cursor-pointer shadow-sm"
+              className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl neu-button text-xs font-semibold text-rose-500 hover:text-rose-600 transition-all cursor-pointer"
               title="Sign Out"
             >
               <LogOut size={15} />

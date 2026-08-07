@@ -28,14 +28,14 @@ export default function TopHeader({
   const tabInfo = TAB_TITLES[activeTab] || { title: 'BytePath Hub', subtitle: 'CS & IT Scholar Portal' };
 
   return (
-    <header className="sticky top-0 z-30 bg-white/90 dark:bg-[#070712]/90 backdrop-blur-xl border-b border-slate-200/80 dark:border-indigo-950/40 px-4 sm:px-6 lg:px-8 py-3.5 transition-all">
+    <header className="sticky top-0 z-30 bg-[#e6ecf5]/90 dark:bg-[#0c0e1a]/90 backdrop-blur-xl border-b border-slate-300/30 dark:border-slate-800/80 px-4 sm:px-6 lg:px-8 py-3.5 transition-all">
       <div className="flex items-center justify-between gap-4 max-w-7xl mx-auto">
         
         {/* Left: Mobile Toggle & Page Title */}
         <div className="flex items-center gap-3">
           <button
             onClick={onOpenSidebar}
-            className="md:hidden w-10 h-10 rounded-xl bg-slate-100 dark:bg-surface-700 text-slate-600 dark:text-slate-200 hover:text-indigo-500 transition-colors"
+            className="md:hidden w-10 h-10 neu-button flex items-center justify-center text-slate-600 dark:text-slate-200"
             aria-label="Open Sidebar"
           >
             <Menu size={20} />
@@ -47,7 +47,7 @@ export default function TopHeader({
                 {tabInfo.title}
               </h1>
               {activeTab === 'advisor' && (
-                <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white animate-pulse">
+                <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-600 dark:text-indigo-300">
                   <Sparkles size={10} /> AI Active
                 </span>
               )}
@@ -64,17 +64,17 @@ export default function TopHeader({
           {/* Quick Search Button */}
           <button
             onClick={onOpenSearch}
-            className="flex items-center gap-2.5 px-3 sm:px-4 py-2 rounded-xl bg-slate-100 dark:bg-surface-700/60 border border-slate-200 dark:border-indigo-950/50 text-slate-500 dark:text-slate-300 hover:border-indigo-500 text-xs font-medium transition cursor-pointer shadow-sm"
+            className="flex items-center gap-2.5 px-3.5 sm:px-4 py-2 neu-button text-slate-600 dark:text-slate-300 hover:text-indigo-600 text-xs font-semibold transition cursor-pointer"
           >
             <Search size={15} className="text-indigo-500" />
             <span className="hidden sm:inline">Search courses, tools...</span>
-            <kbd className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-400">
+            <kbd className="text-[10px] font-mono px-1.5 py-0.5 rounded neu-inset text-slate-500 dark:text-slate-400">
               ⌘K
             </kbd>
           </button>
 
           {/* Quick Roll ID */}
-          <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100/70 dark:bg-surface-700/40 border border-slate-200/60 dark:border-indigo-950/40">
+          <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 neu-inset">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
             <span className="text-[11px] font-mono font-bold text-slate-600 dark:text-slate-300">
               ID: {studentId}
@@ -83,19 +83,18 @@ export default function TopHeader({
 
           {/* Quick CGPA Pill */}
           {parseFloat(currentCgpa) > 0 && (
-            <div className="px-3 py-1 rounded-xl bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 text-center">
+            <div className="px-3 py-1 neu-button text-center">
               <span className="text-[9px] uppercase font-bold text-slate-400 block leading-none">CGPA</span>
-              <span className="text-xs font-black gradient-text leading-tight">{currentCgpa}</span>
+              <span className="text-xs font-black text-indigo-600 dark:text-indigo-300 leading-tight">{currentCgpa}</span>
             </div>
           )}
 
           {/* Theme Toggle Button */}
           <button
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="w-10 h-10 rounded-xl border border-slate-200 dark:border-indigo-950/40 bg-white/70 dark:bg-surface-700/60 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-indigo-500 dark:hover:text-indigo-400 hover:scale-105 transition-all cursor-pointer shadow-sm"
+            className="w-10 h-10 neu-button flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-indigo-500 transition-all cursor-pointer"
             title="Toggle Light/Dark Theme"
             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
-            aria-pressed={theme === 'dark'}
           >
             {theme === 'dark' ? <Sun size={16} className="text-amber-400" /> : <Moon size={16} className="text-indigo-500" />}
           </button>
@@ -103,7 +102,7 @@ export default function TopHeader({
           {/* Logout Button */}
           <button
             onClick={handleLogout}
-            className="w-10 h-10 rounded-xl border border-rose-200 dark:border-rose-900/30 bg-rose-500/10 hover:bg-rose-500 text-rose-500 hover:text-white flex items-center justify-center transition-all cursor-pointer font-semibold shadow-sm"
+            className="w-10 h-10 neu-button text-rose-500 hover:text-rose-600 flex items-center justify-center transition-all cursor-pointer font-semibold"
             title="Sign Out"
             aria-label="Sign out"
           >
@@ -115,4 +114,5 @@ export default function TopHeader({
     </header>
   );
 }
+
 
