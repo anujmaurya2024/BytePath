@@ -403,32 +403,6 @@ export default function LoginPage({ onLoginSuccess }) {
               </div>
             </div>
 
-            <div className="space-y-2 pt-2">
-              <button
-                type="button"
-                onClick={() => handleSimulatedGoogleLogin({ name: 'Anjali Sharma', email: 'anjali.cs2026@gmail.com' })}
-                className="w-full p-3 neu-button flex items-center justify-between text-left"
-              >
-                <div>
-                  <p className="text-xs font-bold text-slate-700 dark:text-slate-200">Anjali Sharma</p>
-                  <p className="text-[10px] text-slate-400">anjali.cs2026@gmail.com</p>
-                </div>
-                <span className="text-[9px] font-bold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600">Verified</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleSimulatedGoogleLogin({ name: 'Rohan Verma', email: 'rohan.it2026@gmail.com' })}
-                className="w-full p-3 neu-button flex items-center justify-between text-left"
-              >
-                <div>
-                  <p className="text-xs font-bold text-slate-700 dark:text-slate-200">Rohan Verma</p>
-                  <p className="text-[10px] text-slate-400">rohan.it2026@gmail.com</p>
-                </div>
-                <span className="text-[9px] font-bold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600">Verified</span>
-              </button>
-            </div>
-
             {/* Custom Google Email */}
             <form onSubmit={(e) => { e.preventDefault(); if (googleCustomEmail) handleSimulatedGoogleLogin({ name: googleCustomName || 'Google Scholar', email: googleCustomEmail }); }} className="pt-2 space-y-2">
               <input
