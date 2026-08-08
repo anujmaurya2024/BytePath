@@ -361,7 +361,7 @@ export default function Dashboard({
       {/* Handcrafted developer credit note */}
       <div className="glass-card p-4 text-center border border-slate-200 dark:border-indigo-950/10 bg-slate-50/20 dark:bg-surface-800/5 mt-4 flex items-center justify-center gap-2 flex-wrap">
         <span className="text-[10px] text-slate-500 font-semibold tracking-wider uppercase">Project Status:</span>
-        <span className="badge bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 text-[9px] font-bold">BytePath Beta v1.2</span>
+        <span className="badge bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 text-[9px] font-bold">ByteStudy Beta v1.2</span>
         <span className="text-[10px] text-slate-400 dark:text-slate-600 font-mono">•</span>
         <span className="text-[10px] text-slate-500 font-medium">Handcrafted with ❤️, caffeine, and late-night coding sessions by a B.Tech CS & IT student. Powered by local storage and offline Web Audio oscillators.</span>
       </div>

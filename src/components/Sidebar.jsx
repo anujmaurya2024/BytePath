@@ -22,6 +22,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import { TOTAL_PROGRAM_CREDITS } from '../data/syllabus';
+import { isAdminAccount } from '../services/authApi';
 
 const NAV_SECTIONS = [
   {
@@ -68,7 +69,7 @@ export default function Sidebar({
   isOpen,
   setIsOpen
 }) {
-  const isAdmin = studentId?.toLowerCase() === 'admin';
+  const isAdmin = isAdminAccount({ loginId: studentId });
   const creditsPct = Math.min((earnedCredits / TOTAL_PROGRAM_CREDITS) * 100, 100);
   
   const getCgpaBadgeColor = (val) => {
@@ -108,7 +109,7 @@ export default function Sidebar({
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <h1 className="text-xl font-black text-slate-800 dark:text-slate-100 tracking-tight">BytePath</h1>
+                  <h1 className="text-xl font-black text-slate-800 dark:text-slate-100 tracking-tight">ByteStudy</h1>
                   <span className="text-[9px] font-bold px-1.5 py-0.5 rounded neu-button text-indigo-600 dark:text-indigo-300">
                     v2.0
                   </span>
@@ -293,7 +294,7 @@ export default function Sidebar({
           </div>
 
           <div className="text-center text-[10px] text-slate-400 pt-1">
-            BytePath Scholar Suite © 2026
+            ByteStudy Scholar Suite © 2026
           </div>
         </div>
 

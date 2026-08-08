@@ -36,7 +36,7 @@ export default function EndSemSubscriptionModal({
       key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_WEWANTKEY', // Razorpay Key ID
       amount: selectedPlan.price * 100, // Amount in paise (₹99 -> 9900 paise)
       currency: 'INR',
-      name: 'BytePath Scholar Pass',
+      name: 'ByteStudy Scholar Pass',
       description: `End-Sem Premium Pass - ${selectedPlan.label}`,
       image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=100',
       handler: function (response) {

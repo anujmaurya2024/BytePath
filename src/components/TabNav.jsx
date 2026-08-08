@@ -12,6 +12,7 @@ import {
   FileText,
   Brain
 } from 'lucide-react';
+import { isAdminAccount } from '../services/authApi';
 
 const TABS = [
   // Academic Group
@@ -31,7 +32,7 @@ const TABS = [
 ];
 
 export default function TabNav({ activeTab, setActiveTab, studentId }) {
-  const isAdmin = studentId.toLowerCase() === 'admin';
+  const isAdmin = isAdminAccount({ loginId: studentId });
 
   return (
     <nav className="sticky top-[73px] z-40 bg-white/90 dark:bg-[#0a0a12]/90 backdrop-blur-lg border-b border-slate-200 dark:border-indigo-950/30">

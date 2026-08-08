@@ -1,7 +1,23 @@
-const USERS_KEY = 'bytepath.auth.users.v2';
-const LEGACY_USERS_KEY = 'bytepath.auth.users.v1';
-const SESSION_KEY = 'bytepath.auth.session.v1';
+const USERS_KEY = 'bytestudy.auth.users.v2';
+const LEGACY_USERS_KEY = 'bytestudy.auth.users.v1';
+const SESSION_KEY = 'bytestudy.auth.session.v1';
 const API_BASE_URL = (import.meta.env.VITE_AUTH_API_URL || '').replace(/\/$/, '');
+
+export const ADMIN_LOGIN_ID = 'anuj@gmail.com';
+export const ADMIN_EMAIL = 'anuj@gmail.com';
+export const ADMIN_PASSWORD = 'abcd1234';
+
+export const isAdminAccount = (account = {}) => {
+  const loginId = account?.loginId || '';
+  const email = account?.email || '';
+  const role = account?.role || '';
+
+  return (
+    normaliseLoginId(loginId) === normaliseLoginId(ADMIN_LOGIN_ID)
+    || normaliseEmail(email) === normaliseEmail(ADMIN_EMAIL)
+    || role === 'admin'
+  );
+};
 
 const readJson = (key, fallback) => {
   try {
@@ -52,14 +68,14 @@ const createUniqueLoginId = (users) => {
 };
 
 const hashPassword = async (password) => {
-  const encoded = new TextEncoder().encode(`bytepath-local-auth-v1:${password}`);
+  const encoded = new TextEncoder().encode(`bytestudy-local-auth-v1:${password}`);
 
   if (globalThis.crypto?.subtle) {
     const digest = await globalThis.crypto.subtle.digest('SHA-256', encoded);
     return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, '0')).join('');
   }
 
-  return btoa(unescape(encodeURIComponent(`bytepath-local-auth-v1:${password}`)));
+  return btoa(unescape(encodeURIComponent(`bytestudy-local-auth-v1:${password}`)));
 };
 
 const sessionFromUser = ({ loginId, name, email }) => ({ loginId, name, email });
@@ -155,8 +171,26 @@ export async function registerAccount({ name, email, password }) {
 export async function signIn({ identity, password }) {
   const cleanIdentity = normaliseIdentity(identity);
 
-  if (!cleanIdentity) throw new Error('Enter your unique BytePath ID or Google email.');
+  if (!cleanIdentity) throw new Error('Enter your unique ByteStudy ID or Google email.');
   if (!password) throw new Error('Enter your password.');
+
+  const adminSession = (() => {
+    const matchesAdminIdentity = cleanIdentity === normaliseLoginId(ADMIN_LOGIN_ID) || cleanIdentity === normaliseEmail(ADMIN_EMAIL);
+    if (matchesAdminIdentity && password === ADMIN_PASSWORD) {
+      return {
+        loginId: ADMIN_LOGIN_ID,
+        name: 'System Administrator',
+        email: ADMIN_EMAIL,
+        role: 'admin',
+      };
+    }
+    return null;
+  })();
+
+  if (adminSession) {
+    saveSession(adminSession);
+    return sessionFromUser(adminSession);
+  }
 
   if (hasRemoteAuthApi()) {
     const session = await request('/auth/login', { identity: cleanIdentity, password });

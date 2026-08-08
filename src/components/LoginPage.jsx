@@ -267,7 +267,7 @@ export default function LoginPage({ onLoginSuccess }) {
               <CheckCircle2 size={16} />
               <span>Account Issued!</span>
             </div>
-            <p className="text-[11px] text-slate-500">Your Unique BytePath ID:</p>
+            <p className="text-[11px] text-slate-500">Your Unique ByteStudy ID:</p>
             <div className="flex items-center justify-center gap-2">
               <code className="text-xs font-mono font-black text-indigo-600 dark:text-indigo-300">{issuedAccount.loginId}</code>
               <button onClick={copyUniqueId} className="p-1 text-slate-500 hover:text-slate-800 dark:hover:text-white">
@@ -356,7 +356,7 @@ export default function LoginPage({ onLoginSuccess }) {
               </div>
               <div>
                 <h3 className="text-sm font-bold text-slate-800 dark:text-slate-100">Sign in with Google</h3>
-                <p className="text-[11px] text-slate-400">Choose an account for BytePath</p>
+                <p className="text-[11px] text-slate-400">Choose an account for ByteStudy</p>
               </div>
             </div>
 

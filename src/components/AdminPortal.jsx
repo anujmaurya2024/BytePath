@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { SYLLABUS } from '../data/syllabus';
 import { Shield, Plus, Trash2, Video, File, Check } from 'lucide-react';
+import { isAdminAccount } from '../services/authApi';
 
 export default function AdminPortal({ uploadedPyqs, setUploadedPyqs, studentId }) {
-  const isAdmin = studentId.toLowerCase() === 'admin';
+  const isAdmin = isAdminAccount({ loginId: studentId });
 
   // Form states
   const [adminSem, setAdminSem] = useState(1);
@@ -28,7 +29,7 @@ export default function AdminPortal({ uploadedPyqs, setUploadedPyqs, studentId }
         <span className="text-4xl">⚠️</span>
         <h3 className="text-base font-bold text-slate-800 dark:text-slate-200 mt-2">Restricted Console</h3>
         <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-          The Admin Portal is locked. Sign in with the university roll number <strong>admin</strong> to publish mock exams and video recommendations.
+          The Admin Portal is locked. Sign in with the dedicated administrator credentials to publish mock exams and video recommendations.
         </p>
       </div>
     );

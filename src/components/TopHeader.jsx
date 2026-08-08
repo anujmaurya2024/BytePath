@@ -25,7 +25,7 @@ export default function TopHeader({
   onOpenSidebar,
   onOpenSearch
 }) {
-  const tabInfo = TAB_TITLES[activeTab] || { title: 'BytePath Hub', subtitle: 'CS & IT Scholar Portal' };
+  const tabInfo = TAB_TITLES[activeTab] || { title: 'ByteStudy Hub', subtitle: 'CS & IT Scholar Portal' };
 
   return (
     <header className="sticky top-0 z-30 bg-[#e6ecf5]/90 dark:bg-[#0c0e1a]/90 backdrop-blur-xl border-b border-slate-300/30 dark:border-slate-800/80 px-4 sm:px-6 lg:px-8 py-3.5 transition-all">

@@ -50,7 +50,7 @@ export default function OnboardingModal({
             <Sparkles size={11} /> First-Time Setup
           </div>
           <h2 className="text-2xl font-black gradient-text tracking-tight">
-            Welcome to BytePath!
+            Welcome to ByteStudy!
           </h2>
           <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto">
             Please enter your name, target CGPA goal, and past semester SGPAs to set up your academic profile.

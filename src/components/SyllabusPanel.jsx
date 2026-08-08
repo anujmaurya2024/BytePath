@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SYLLABUS } from '../data/syllabus';
 import { Download, Youtube, ExternalLink, FileText, Library, Lock, Sparkles, CheckCircle2, ShieldAlert } from 'lucide-react';
 import EndSemSubscriptionModal from './EndSemSubscriptionModal';
+import { isAdminAccount } from '../services/authApi';
 
 export default function SyllabusPanel({
   uploadedPyqs = [],
@@ -12,6 +13,8 @@ export default function SyllabusPanel({
   const [selectedSem, setSelectedSem] = useState(1);
   const [isSubModalOpen, setIsSubModalOpen] = useState(false);
   const [pendingDownload, setPendingDownload] = useState(null);
+  const isAdmin = isAdminAccount({ loginId: studentId });
+  const hasPremiumAccess = isAdmin || hasEndSemSubscription;
 
   // Trigger base64 file downloads
   const downloadBase64File = (base64String, fileName) => {
@@ -24,7 +27,7 @@ export default function SyllabusPanel({
   };
 
   const handleEndSemClick = (courseTitle, fileData = null, fileName = null) => {
-    if (!hasEndSemSubscription) {
+    if (!hasPremiumAccess) {
       setPendingDownload({ courseTitle, fileData, fileName });
       setIsSubModalOpen(true);
     } else {
@@ -60,30 +63,30 @@ export default function SyllabusPanel({
       
       {/* ── End-Sem VIP Pass Banner ─────────────────────────────────── */}
       <div className={`p-4 rounded-2xl glass-card border flex items-center justify-between flex-wrap gap-4 transition-all ${
-        hasEndSemSubscription 
+        hasPremiumAccess 
           ? 'border-emerald-500/30 bg-gradient-to-r from-emerald-500/10 via-teal-500/5 to-transparent' 
           : 'border-indigo-500/30 bg-gradient-to-r from-indigo-500/10 via-purple-500/5 to-transparent'
       }`}>
         <div className="flex items-center gap-3">
           <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-white shadow-md ${
-            hasEndSemSubscription ? 'bg-gradient-to-tr from-emerald-500 to-teal-600' : 'bg-gradient-to-tr from-indigo-500 to-purple-600'
+            hasPremiumAccess ? 'bg-gradient-to-tr from-emerald-500 to-teal-600' : 'bg-gradient-to-tr from-indigo-500 to-purple-600'
           }`}>
-            {hasEndSemSubscription ? <CheckCircle2 size={22} /> : <Lock size={20} />}
+            {hasPremiumAccess ? <CheckCircle2 size={22} /> : <Lock size={20} />}
           </div>
           <div>
             <div className="flex items-center gap-2">
               <h3 className="font-bold text-sm text-slate-800 dark:text-slate-200">
-                {hasEndSemSubscription ? 'End-Sem VIP Pass Active 🌟' : 'End-Sem Files Locked 🔒'}
+                {hasPremiumAccess ? (isAdmin ? 'Admin Access Active 🛡️' : 'End-Sem VIP Pass Active 🌟') : 'End-Sem Files Locked 🔒'}
               </h3>
               <span className={`text-[9px] font-extrabold px-2 py-0.5 rounded-full text-white ${
                 hasEndSemSubscription ? 'bg-emerald-500' : 'bg-indigo-500'
               }`}>
-                {hasEndSemSubscription ? 'UNLOCKED VIA RAZORPAY' : 'RAZORPAY PASS'}
+                {hasPremiumAccess ? (isAdmin ? 'ADMIN OVERRIDE' : 'UNLOCKED VIA RAZORPAY') : 'RAZORPAY PASS'}
               </span>
             </div>
             <p className="text-xs text-slate-500 mt-0.5">
-              {hasEndSemSubscription 
-                ? 'Full 8-Semester End-Sem question papers, answer keys, and model notes unlocked.' 
+              {hasPremiumAccess 
+                ? (isAdmin ? 'Administrator access is active, so all End-Sem materials are available without a subscription.' : 'Full 8-Semester End-Sem question papers, answer keys, and model notes unlocked.') 
                 : 'Mid-Sem materials are FREE. End-Sem papers require a one-time Razorpay subscription.'
               }
             </p>
@@ -208,14 +211,14 @@ export default function SyllabusPanel({
                     <button 
                       onClick={() => handleEndSemClick(course.title)}
                       className={`px-2.5 py-1 text-[10px] font-bold rounded-lg border transition-all cursor-pointer flex items-center gap-1.5 ${
-                        hasEndSemSubscription
+                        hasPremiumAccess
                           ? 'bg-indigo-500/15 border-indigo-500/30 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-500/25'
                           : 'bg-gradient-to-r from-amber-500/15 to-rose-500/15 border-amber-500/30 text-amber-600 dark:text-amber-300 hover:scale-105'
                       }`}
                     >
-                      {hasEndSemSubscription ? <Download size={11} /> : <Lock size={11} className="text-amber-500" />}
+                      {hasPremiumAccess ? <Download size={11} /> : <Lock size={11} className="text-amber-500" />}
                       <span>End-Sem File</span>
-                      {!hasEndSemSubscription && (
+                      {!hasPremiumAccess && (
                         <span className="text-[8px] bg-amber-500 text-white px-1 rounded font-black">VIP</span>
                       )}
                     </button>
@@ -245,20 +248,20 @@ export default function SyllabusPanel({
 
                             <button 
                               onClick={() => {
-                                if (isEndSemFile && !hasEndSemSubscription) {
+                                if (isEndSemFile && !hasPremiumAccess) {
                                   handleEndSemClick(res.title, res.fileData, res.fileName);
                                 } else {
                                   downloadBase64File(res.fileData, res.fileName);
                                 }
                               }}
                               className={`px-2.5 py-1.5 text-[10px] font-bold rounded-lg transition-colors shrink-0 flex items-center gap-1 cursor-pointer ${
-                                isEndSemFile && !hasEndSemSubscription
+                                isEndSemFile && !hasPremiumAccess
                                   ? 'bg-amber-500 hover:bg-amber-600 text-white'
                                   : 'bg-indigo-600 hover:bg-indigo-500 text-white'
                               }`}
                             >
-                              {isEndSemFile && !hasEndSemSubscription ? <Lock size={10} /> : <Download size={10} />}
-                              <span>{isEndSemFile && !hasEndSemSubscription ? 'Unlock' : 'Download'}</span>
+                              {isEndSemFile && !hasPremiumAccess ? <Lock size={10} /> : <Download size={10} />}
+                              <span>{isEndSemFile && !hasPremiumAccess ? 'Unlock' : 'Download'}</span>
                             </button>
                           </div>
                         );
