@@ -93,7 +93,7 @@ export default function SyllabusPanel({
           </div>
         </div>
 
-        {!hasEndSemSubscription && (
+        {!hasPremiumAccess && !hasEndSemSubscription && (
           <button
             onClick={() => setIsSubModalOpen(true)}
             className="btn-primary text-xs py-2 px-4 rounded-xl flex items-center gap-1.5 shadow-md cursor-pointer"

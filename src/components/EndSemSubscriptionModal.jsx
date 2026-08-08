@@ -7,10 +7,15 @@ export default function EndSemSubscriptionModal({
   onSubscribeSuccess,
   studentId
 }) {
+  const isAdmin = Boolean(studentId && String(studentId).toLowerCase() === 'anuj@gmail.com');
   const [selectedPlan, setSelectedPlan] = useState({ id: 'sem', price: 99, label: 'Semester Pass (₹99)' });
   const [isProcessing, setIsProcessing] = useState(false);
 
   if (!isOpen) return null;
+
+  if (isAdmin) {
+    return null;
+  }
 
   const handleRazorpayPayment = async () => {
     setIsProcessing(true);
