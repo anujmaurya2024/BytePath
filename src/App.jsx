@@ -218,7 +218,7 @@ export default function App() {
 
         {/* Global Footer */}
         <footer className="border-t border-slate-200/80 dark:border-indigo-950/30 py-6 text-center text-xs text-slate-400 relative z-10 shrink-0 mt-auto">
-          <p>© 2026 ByteStudy B.Tech CS & IT Scholar Hub. Integrated 196-Credit Curriculum. Crafted by Anuj Maurya, 3rd Year.</p>
+          <p>**Built by Anuj 👨‍💻 | 3rd-Year B.Tech IT Student | Learning, coding, creating, and turning ideas into reality. ❤️💻**</p>
         </footer>
       </div>
 
